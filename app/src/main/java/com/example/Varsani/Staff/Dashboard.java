@@ -81,7 +81,10 @@ public class Dashboard extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), ApprovedOrders.class));
         } else if (id == R.id.nav_new_serv_payments) {
             startActivity(new Intent(getApplicationContext(), NewServicePayments.class));
-        } else if (id == R.id.nav_approved_serv_payments) {
+        } else if (id == R.id.nav_new_booking_payments) {
+            startActivity(new Intent(getApplicationContext(), NewBookingPayments.class));
+        }
+        else if (id == R.id.nav_approved_serv_payments) {
             startActivity(new Intent(getApplicationContext(), ApprovedServPayments.class));
         } else if (id == R.id.nav_supplier_payments) {
             startActivity(new Intent(getApplicationContext(), SupplyPayments.class));
@@ -195,6 +198,7 @@ public class Dashboard extends AppCompatActivity {
         navigationView.getMenu().findItem(R.id.nav_materials).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_tools).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_service_completed).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_new_booking_payments).setVisible(false);
 
         if (session.isLoggedIn()) {
             String userType = user.getUser_type();
@@ -205,6 +209,7 @@ public class Dashboard extends AppCompatActivity {
                 navigationView.getMenu().findItem(R.id.nav_new_serv_payments).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_approved_serv_payments).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_supplier_payments).setVisible(true);
+                navigationView.getMenu().findItem(R.id.nav_new_booking_payments).setVisible(true);
 
             } else if (userType.equals("Shipping Manager")) {
                 navigationView.getMenu().findItem(R.id.nav_orders_to_shipp).setVisible(true);

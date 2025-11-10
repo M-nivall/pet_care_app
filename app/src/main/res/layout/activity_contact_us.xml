@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lunga Lunga Road, Kenya"
+                android:text="Road C, Off Enterprise Road, Industrial Area, Nairobi."
                 android:paddingStart="8dp"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+254 7567-8690"
+                android:text="+254 733 374 022"
                 android:paddingStart="8dp"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+254 7490-0000"
+                android:text="+254 722 582 500"
                 android:paddingStart="8dp"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -94,7 +94,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="refnet@refnetairconditioning.com"
+                android:text="info@woodwayskenya.com"
                 android:paddingStart="8dp"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -112,7 +112,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="info@refnetconditioning.com"
+                android:text="info@woodways.com"
                 android:paddingStart="8dp"
                 android:textSize="16sp" />
         </LinearLayout>

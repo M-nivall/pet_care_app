@@ -111,10 +111,10 @@ public class InvoiceItems extends AppCompatActivity {
 
         txv_orderStatus.setText(orderStatus);
         txv_orderDate.setText("Invoiced On:: "+orderDate);
-        txv_orderID.setText("Order No: "+orderID);
+        txv_orderID.setText("Booking ID: "+orderID);
         txv_mapesaCose.setText("Address:"+mpesaCode);
         //txv_shippingCost.setText("Shipping cost "+shippingCost);
-       // txv_itemCost.setText("Item cost "+itemCost);
+        //txv_itemCost.setText("Item cost "+itemCost);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getApplicationContext(),1);
@@ -235,8 +235,8 @@ public class InvoiceItems extends AppCompatActivity {
                                     String subTotal = jsn.getString("subTotal");
 
                                     txv_service.setText(itemName);
-                                    txv_price.setText(itemPrice);
-                                    txv_orderCost.setText("Total Amount :"+itemPrice);
+                                    txv_price.setText(subTotal);
+                                    txv_orderCost.setText("Total Amount :"+subTotal);
 
                                     OrderItemModal orderItemModal = new OrderItemModal(itemName, itemPrice, quantity, subTotal);
                                     list.add(orderItemModal);

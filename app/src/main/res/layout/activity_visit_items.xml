@@ -20,18 +20,21 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <!-- Booking Details Card -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_payment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:elevation="5dp"
-                    app:cardElevation="15dp">
+                    app:cardElevation="15dp"
+                    app:cardCornerRadius="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
                         <TextView
                             android:id="@+id/txv_details"
@@ -65,7 +68,6 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_below="@id/txv_orderStatus"
                             android:background="@android:color/black" />
 
                         <TextView
@@ -144,6 +146,65 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true" />
 
+                <!-- NEW: Service Fee Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_service_fee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Enter Service Fee"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            android:gravity="center" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Total Service Fee (KSh)"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_service_fee"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:textColor="@color/colorBlack"
+                                android:padding="8dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Additional Notes (optional)"
+                            android:layout_marginTop="6dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_service_notes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textMultiLine"
+                                android:minLines="2"
+                                android:padding="8dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
                 <TextView
                     android:id="@+id/txv_selectpayment"
                     android:layout_width="match_parent"
@@ -194,9 +255,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold" />
 
-
                 <RadioGroup
-
                     android:id="@+id/rb_materials"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -240,25 +299,23 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-
                         <CheckBox
                             android:id="@+id/checkBox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Screw pack" />
+                            android:text="Power drill" />
 
                         <CheckBox
                             android:id="@+id/checkBox2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Wrenches"/>
+                            android:text="Circular saw" />
 
                         <CheckBox
                             android:id="@+id/checkBox3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Feeler Gauge" />
-
+                            android:text="Tape measure" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -270,57 +327,50 @@
                             android:id="@+id/checkBox4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pipe Sealant" />
+                            android:text="Hammer" />
 
                         <CheckBox
                             android:id="@+id/checkBox5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Multimeter" />
+                            android:text="Sealant" />
 
                         <CheckBox
                             android:id="@+id/checkBox6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Manifold Gauge" />
-
+                            android:text="Safety gear" />
                     </LinearLayout>
-
-
                 </LinearLayout>
 
-
-
             </LinearLayout>
-
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
+
     <RelativeLayout
+        android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:id="@+id/layout_bottom"
-        android:background="@color/transparent"
-        >
+        android:background="@color/transparent">
 
         <Button
+            android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_submit"
             android:background="@color/colorAccent"
             android:text="Submit Form "
-            android:layout_alignParentLeft="true"
-            android:layout_marginRight="15dp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:textColor="@color/colorWhite"/>
+            android:paddingRight="5dp" />
 
         <ProgressBar
             android:id="@+id/progressBar1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     </RelativeLayout>
 </RelativeLayout>

@@ -65,6 +65,7 @@ public class VisitItems extends AppCompatActivity {
     private UserModel user;
     private RelativeLayout layout_bottom;
     private LinearLayout layoutmaterials;
+    private EditText edt_service_fee, edt_service_notes;
     private Button btn_submit;
     private RadioGroup radioGroup;
     private RadioButton rb_no_materials,rb_yes_materials;
@@ -93,6 +94,8 @@ public class VisitItems extends AppCompatActivity {
         txv_name = findViewById(R.id.txv_name);
         txv_orderStatus = findViewById(R.id.txv_orderStatus);
         txv_orderID = findViewById(R.id.txv_orderID);
+        edt_service_fee = findViewById(R.id.edt_service_fee);
+        edt_service_notes = findViewById(R.id.edt_service_notes);
         btn_submit = findViewById(R.id.btn_submit);
 
         edt_materials = findViewById(R.id.edt_materials);
@@ -148,7 +151,7 @@ public class VisitItems extends AppCompatActivity {
                     if (materials.length() > 0) {
                         materials.append(", ");
                     }
-                    materials.append("Screw pack");
+                    materials.append("Power drill");
                     edt_materials.setText(materials);
                 }
             }
@@ -161,7 +164,7 @@ public class VisitItems extends AppCompatActivity {
                     if (materials.length() > 0) {
                         materials.append(", ");
                     }
-                    materials.append("Wrenches");
+                    materials.append("Circular saw");
                     edt_materials.setText(materials);
                 }
             }
@@ -174,7 +177,7 @@ public class VisitItems extends AppCompatActivity {
                     if (materials.length() > 0) {
                         materials.append(", ");
                     }
-                    materials.append("Feeler Gauge");
+                    materials.append("Tape measure");
                     edt_materials.setText(materials);
                 }
             }
@@ -187,7 +190,7 @@ public class VisitItems extends AppCompatActivity {
                     if (materials.length() > 0) {
                         materials.append(", ");
                     }
-                    materials.append("Pipe Sealant");
+                    materials.append("Hammer");
                     edt_materials.setText(materials);
                 }
             }
@@ -200,7 +203,7 @@ public class VisitItems extends AppCompatActivity {
                     if (materials.length() > 0) {
                         materials.append(", ");
                     }
-                    materials.append("Multimeter");
+                    materials.append("Sealant");
                     edt_materials.setText(materials);
                 }
             }
@@ -213,7 +216,7 @@ public class VisitItems extends AppCompatActivity {
                     if (materials.length() > 0) {
                         materials.append(", ");
                     }
-                    materials.append("Manifold Gauge");
+                    materials.append("Safety gear");
                     edt_materials.setText(materials);
                 }
             }
@@ -338,6 +341,10 @@ public class VisitItems extends AppCompatActivity {
     public void markOrder(){
         progressBar1.setVisibility(View.VISIBLE);
         btn_submit.setVisibility(View.GONE);
+
+        final String service_notes = edt_service_notes.getText().toString().trim();
+        final String service_fee = edt_service_fee.getText().toString().trim();
+
         StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_SEND_QUOTATION,
                 new Response.Listener<String>() {
                     @Override
@@ -391,6 +398,8 @@ public class VisitItems extends AppCompatActivity {
             protected Map<String,String>getParams()throws AuthFailureError{
                 Map<String,String> params=new HashMap<>();
                 params.put("orderID",orderID);
+                params.put("serviceFee",service_fee);
+                params.put("serviceNotes",service_notes);
                 params.put("materials",materials);
                 params.put("empID",user.getClientID());
                 Log.e("PARAMS",""+params);

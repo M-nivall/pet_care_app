@@ -96,57 +96,99 @@ public class Accept extends AppCompatActivity {
 
 
         product = in.getStringExtra("item");
-        if (product.equals("LG Air Conditioners-Split")){
-            unitprice =85000;
+        if (product.equals("Mahogany-Wood")){
+            unitprice =350;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"units");
         }
-        if (product.equals("Fujiair Commercial Air Conditioner Units")){
-            unitprice = 110000;
+        if (product.equals("Red-Oak-Wood")){
+            unitprice = 450;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"units");
         }
-        if (product.equals("Daikin Air Conditioner Units")){
-            unitprice =75000;
+        if (product.equals("Local-Pine-Wood")){
+            unitprice =300;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"units");
         }
-        if (product.equals("Carrier Air Conditioners")){
-            unitprice = 70000;
+        if (product.equals("Mvule-Wood")){
+            unitprice = 300;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"unit");
         }
-        if (product.equals("Panasonic Air Conditioning Unit")){
-            unitprice = 140000;
+        if (product.equals("Sudanese-Teak-Wood")){
+            unitprice = 500;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"unit");
         }
-        if (product.equals("Samsung Air Conditioning Units")){
-            unitprice = 60000;
+        if (product.equals("Walnut-Wood")){
+            unitprice = 450;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"unit");
         }
-        if (product.equals("Trane Commercial HVAC Systems")){
-            unitprice = 130000;
+        if (product.equals("Ordinary-Plywood")){
+            unitprice = 400;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"unit");
         }
-        if (product.equals("Gree Air Conditioners")){
-            unitprice = 50000;
+        if (product.equals("American-Walnut-Plywood")){
+            unitprice = 550;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Birch-Plywood")){
+            unitprice = 600;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Flexible-Plywood")){
+            unitprice = 250;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Mahogany-Veneer")){
+            unitprice = 300;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Wanut-Veneer")){
+            unitprice = 350;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Red-Oak-Veneer")){
+            unitprice = 750;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Ash-Veneer")){
+            unitprice = 300;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);

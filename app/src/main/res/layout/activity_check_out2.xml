@@ -264,6 +264,81 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_booking_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginHorizontal="8dp"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Booking Payment Title -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Booking Payment"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <!-- Description -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Please pay the KSh 2,500 booking fee to confirm your service request."
+                            android:textSize="14sp"
+                            android:textColor="@color/colorBlack"
+                            android:layout_marginTop="4dp" />
+
+                        <!-- Booking Fee Display -->
+                        <TextView
+                            android:id="@+id/txtBookingAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Amount: KSh 2,500"
+                            android:textStyle="bold"
+                            android:textColor="#1B5E20"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp" />
+
+                        <!-- Payment Instructions -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pay to: M-PESA Till Number 123456"
+                            android:textSize="14sp"
+                            android:textColor="#555"
+                            android:layout_marginTop="4dp" />
+
+                        <!-- Reference Code Input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter M-PESA Reference Code"
+                            android:layout_marginTop="12dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtPaymentRef"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:maxLength="10"
+                                android:imeOptions="actionDone" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
             </LinearLayout>
 
         </ScrollView>
@@ -272,13 +347,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/layout_bottom"
             android:layout_alignParentBottom="true">
+
             <Button
+                android:id="@+id/btn_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Submit"
-                android:id="@+id/btn_order"
-                android:textColor="@color/colorWhite"
-                android:background="@color/transparent"/>
+                android:text="Submit Booking"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_marginTop="12dp" />
 
             <ProgressBar
                 android:id="@id/progressBar"

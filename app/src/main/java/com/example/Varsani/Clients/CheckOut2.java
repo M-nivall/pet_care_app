@@ -57,7 +57,7 @@ public class CheckOut2 extends AppCompatActivity {
     private RelativeLayout layout_bottom;
     private TextView txv_name,txv_phoneNo,txv_email;
     private TextView txv_order_cost,txv_shipping_cost,txv_totalCost,mpesacode;
-    private EditText edt_county,edt_county2,edt_town2,edt_town,edt_address,edt_date;
+    private EditText edt_county,edt_county2,edt_town2,edt_town,edt_address,edt_date,edtPaymentRef;
     private ProgressBar progressBar,progressBarTown,progressBarTown2,progressCheckout;
     private Button btn_checkout;
     private RadioGroup radioGroup;
@@ -115,6 +115,7 @@ public class CheckOut2 extends AppCompatActivity {
         edt_town=findViewById(R.id.edt_town);
         edt_address=findViewById(R.id.edt_Address);
         edt_town=findViewById(R.id.edt_town);
+        edtPaymentRef=findViewById(R.id.edtPaymentRef);
         radioGroup=findViewById(R.id.rbtn_group);
         rb_no_shipping=findViewById(R.id.rb_no_shipping);
         rb_shipping=findViewById(R.id.rb_shipping);
@@ -154,7 +155,7 @@ public class CheckOut2 extends AppCompatActivity {
         arrayCounties =new ArrayList<>();
         arrayTowns=new ArrayList<>();
 
-        //edt_mpesaCode.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
+        edtPaymentRef.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
 
         radioGroup.clearCheck();
 
@@ -271,7 +272,7 @@ public class CheckOut2 extends AppCompatActivity {
 
     public void alertOrderNow(final  View v){
         AlertDialog.Builder  builder=new AlertDialog.Builder(v.getContext());
-        builder.setTitle("Are you sure the entered details are correct!")
+        builder.setTitle("Are you sure to submit this booking!")
                 .setNegativeButton("No",null)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -290,6 +291,7 @@ public class CheckOut2 extends AppCompatActivity {
         final String county=edt_county.getText().toString().trim();
         final String address=edt_address.getText().toString().trim();
         final String townName=edt_town.getText().toString().trim();
+        final  String paymentRef=edtPaymentRef.getText().toString().trim();
 
         if(TextUtils.isEmpty(county)){
             Toast.makeText(getApplicationContext(),"Please enter your  county",Toast.LENGTH_SHORT).show();
@@ -306,6 +308,25 @@ public class CheckOut2 extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Please enter your Apartment/Plot name",Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(View.GONE);
             btn_checkout.setVisibility(View.VISIBLE);
+            return;
+        }
+        if(TextUtils.isEmpty(paymentRef)){
+            Toast.makeText(getApplicationContext(),"Please enter your Payment Reference Code",Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            btn_checkout.setVisibility(View.VISIBLE);
+            return;
+        }
+        if(!paymentRef.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$")){
+            Toast.makeText(getApplicationContext(), "Mpesa code should have  characters and digit",
+                    Toast.LENGTH_LONG).show();
+            btn_checkout.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+        if(paymentRef.length()>10 ||paymentRef.length()<10){
+            Toast.makeText(getApplicationContext(), "Mpesa code  should contain 10 digits", Toast.LENGTH_SHORT).show();
+            btn_checkout.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
             return;
         }
 
@@ -368,6 +389,7 @@ public class CheckOut2 extends AppCompatActivity {
                 params.put("townName",townName);
                 params.put("address",address);
                 params.put("orderCost",o_cost);
+                params.put("paymentRef",paymentRef);
                 params.put("totalCost", String.valueOf(totalCost));
                 Log.e("values",""+params);
                 return params;

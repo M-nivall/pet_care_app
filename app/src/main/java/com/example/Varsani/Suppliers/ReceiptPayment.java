@@ -99,8 +99,8 @@ public class ReceiptPayment extends AppCompatActivity {
                                     // Set the values in the TextViews
                                     tvRequestID.setText("Request ID: " + requestID);
                                     tvItems.setText("Items: " + items);
-                                    tvRequestDate.setText("Request Date: " + requestDate);
-                                    tvRequestStatus.setText("Request Status: " + requestStatus);
+                                    tvRequestDate.setText("Date: " + requestDate);
+                                    tvRequestStatus.setText("Status: " + requestStatus);
                                     tvQuantity.setText("Quantity: " + quantity);
                                     tv_request_amount.setText("Amount: " + amount);
                                 }

@@ -1,4 +1,4 @@
-package com.example.Varsani.Staff.Adapters;
+package com.example.Varsani.Staff.Finance.Adapters;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,20 +10,21 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.Varsani.Staff.Models.ClientItemsModal;
 import com.example.Varsani.Clients.Models.ProductModal;
 import com.example.Varsani.R;
+import com.example.Varsani.Staff.Adapters.AdapterQuotItems;
+import com.example.Varsani.Staff.Models.ClientItemsModal;
 
 import java.util.List;
 
-public class AdapterClientItems extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterBookItems extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<ClientItemsModal> items;
 
     private Context ctx;
     ProgressDialog progressDialog;
-    private OnItemClickListener mOnItemClickListener;
-    private OnMoreButtonClickListener onMoreButtonClickListener;
+    private AdapterBookItems.OnItemClickListener mOnItemClickListener;
+    private AdapterBookItems.OnMoreButtonClickListener onMoreButtonClickListener;
 
     //
 
@@ -32,15 +33,15 @@ public class AdapterClientItems extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public static final String TAG = "Orders adapter";
 
-    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+    public void setOnItemClickListener(final AdapterBookItems.OnItemClickListener mItemClickListener) {
         this.mOnItemClickListener = mItemClickListener;
     }
 
-    public void setOnMoreButtonClickListener(final OnMoreButtonClickListener onMoreButtonClickListener) {
+    public void setOnMoreButtonClickListener(final AdapterBookItems.OnMoreButtonClickListener onMoreButtonClickListener) {
         this.onMoreButtonClickListener = onMoreButtonClickListener;
     }
 
-    public AdapterClientItems(Context context, List<ClientItemsModal> items) {
+    public AdapterBookItems(Context context, List<ClientItemsModal> items) {
         this.items = items;
         ctx = context;
     }
@@ -64,24 +65,28 @@ public class AdapterClientItems extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_client_items, parent, false);
-        vh = new OriginalViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_quot_items, parent, false);
+        vh = new AdapterBookItems.OriginalViewHolder(v);
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if (holder instanceof OriginalViewHolder) {
-            final OriginalViewHolder view = (OriginalViewHolder) holder;
+        if (holder instanceof AdapterBookItems.OriginalViewHolder) {
+            final AdapterBookItems.OriginalViewHolder view = (AdapterBookItems.OriginalViewHolder) holder;
 
             final ClientItemsModal oi= items.get(position);
 
-            view.txv_itemName.setText( oi.getItemName());
+            view.txv_itemName.setText( "Service: "+oi.getItemName());
             view.txv_price.setText("KES "+ oi.getItemPrice());
             view.txv_quantity.setText("X "+ oi.getQuantity());
-            //view.txv_subTotal.setText("Subtotal KES "+ oi.getSubTotal());
-            view.txv_subTotal.setText("Booking Fee ksh: 2,500");
+            view.txv_subTotal.setText("Subtotal KES "+ oi.getSubTotal());
+
+            view.txv_price.setVisibility(View.GONE);
+            view.txv_quantity.setVisibility(View.GONE);
+            view.txv_subTotal.setVisibility(View.GONE);
+
 
         }
     }
@@ -99,7 +104,4 @@ public class AdapterClientItems extends RecyclerView.Adapter<RecyclerView.ViewHo
     public interface OnMoreButtonClickListener {
         void onItemClick(View view, ProductModal obj, MenuItem item);
     }
-
-
-
 }

@@ -15,6 +15,9 @@
             android:id="@+id/nav_approvedOrders"
             android:title="Approved Payments" />
         <item
+            android:id="@+id/nav_new_booking_payments"
+            android:title="New Booking Fee Payments" />
+        <item
             android:id="@+id/nav_new_serv_payments"
             android:title="New Service Payments" />
         <item

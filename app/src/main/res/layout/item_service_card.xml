@@ -44,7 +44,6 @@
 
                 <!-- New TextView for Service Fee -->
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/txv_service_fee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

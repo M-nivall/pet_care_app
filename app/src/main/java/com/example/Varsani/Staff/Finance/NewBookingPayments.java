@@ -1,22 +1,24 @@
-package com.example.Varsani.Staff.Store_mrg;
+package com.example.Varsani.Staff.Finance;
 
-import static com.example.Varsani.utils.Urls.URL_NEW_ORDERS;
-import static com.example.Varsani.utils.Urls.URL_REQUESTMATERIALS;
+import static com.example.Varsani.utils.Urls.URL_NEW_BOOKING_PAYMENTS;
+import static com.example.Varsani.utils.Urls.URL_NEW_SERV_PAYMENTS;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,13 +27,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.Varsani.R;
-import com.example.Varsani.Staff.Adapters.AdapterClientOrders;
-import com.example.Varsani.Staff.Adapters.AdapterGetStock;
+import com.example.Varsani.Staff.Adapters.AdapterNewServPayments;
+import com.example.Varsani.Staff.Finance.Adapters.AdapterNewBooking;
 import com.example.Varsani.Staff.Models.ClientOrderModel;
-import com.example.Varsani.Staff.Models.GetStockModel;
-import com.example.Varsani.Staff.Store_mrg.Adapter.AdapterMaterials;
-import com.example.Varsani.Staff.Store_mrg.Adapter.AdapterRequest;
-import com.example.Varsani.Staff.Store_mrg.Model.RequestModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,39 +37,30 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RequestedMaterials extends AppCompatActivity {
-    private RecyclerView recyclerView;
+public class NewBookingPayments extends AppCompatActivity {
+
+    private List<ClientOrderModel> list;
+    private AdapterNewBooking adapterNewBooking;
     private ProgressBar progressBar;
-    private List<RequestModel> list;
-    private AdapterMaterials adapter;
-    private Button btn_next;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requested_materials);
+        setContentView(R.layout.activity_new_booking_payments);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Requested Materials");
-        progressBar = findViewById(R.id.progressBar);
-        recyclerView = findViewById(R.id.recyclerView);
-        btn_next = findViewById(R.id.btn_next);
+        getSupportActionBar().setTitle("New Booking Fee Payments");
+        recyclerView=findViewById(R.id.recyclerView);
+        progressBar=findViewById(R.id.progressBar);
 
-        list = new ArrayList<>();
+        list=new ArrayList<>();
+        recyclerView.setLayoutManager( new LinearLayoutManager( getApplicationContext() ) );
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 1);
+        recyclerView.setLayoutManager(mLayoutManager);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 1);
-        recyclerView.setLayoutManager(layoutManager);
 
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(getApplicationContext(), RequestSupplier.class);
-                startActivity(in);
-            }
-        });
-
-        requests();
+        newBookings();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -80,8 +69,8 @@ public class RequestedMaterials extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    public void requests(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_REQUESTMATERIALS,
+    public void newBookings(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_NEW_BOOKING_PAYMENTS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -95,20 +84,23 @@ public class RequestedMaterials extends AppCompatActivity {
                                 JSONArray jsonArray=jsonObject.getJSONArray("details");
                                 for(int i=0; i <jsonArray.length();i++){
                                     JSONObject jsn=jsonArray.getJSONObject(i);
-                                    String requestID=jsn.getString("requestID");
-                                    String name=jsn.getString("name");
-                                    String phoneNo=jsn.getString("phoneNo");
-                                    String items=jsn.getString("items");
-                                    String requestDate=jsn.getString("requestDate");
-                                    String requestStatus=jsn.getString("requestStatus");
-                                    String amount=jsn.getString("amount");
-                                    String quantity=jsn.getString("amount");
-                                    RequestModel rq=new RequestModel(requestID,  name,  phoneNo,
-                                            items,  requestDate,  requestStatus, amount, quantity);
-                                    list.add(rq);
+                                    String orderID=jsn.getString("orderID");
+                                    String clientName=jsn.getString("clientName");
+                                    String mpesaCode=jsn.getString("mpesaCode");
+                                    String orderCost=jsn.getString("orderCost");
+                                    String orderStatus=jsn.getString("orderStatus");
+                                    String orderDate=jsn.getString("orderDate");
+                                    String shippingCost=jsn.getString("shippingCost");
+                                    String itemCost=jsn.getString("itemCost");
+                                    String county=jsn.getString("county");
+                                    String town=jsn.getString("town");
+                                    String address=jsn.getString("address");
+                                    ClientOrderModel clientOrderModel=new ClientOrderModel(orderID,clientName,mpesaCode,
+                                            orderCost,orderStatus,orderDate,shippingCost,itemCost,county,town,address);
+                                    list.add(clientOrderModel);
                                 }
-                                adapter=new AdapterMaterials(getApplicationContext(),list);
-                                recyclerView.setAdapter(adapter);
+                                adapterNewBooking=new AdapterNewBooking(getApplicationContext(),list);
+                                recyclerView.setAdapter(adapterNewBooking);
                                 progressBar.setVisibility(View.GONE);
 
                             }else{

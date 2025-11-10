@@ -39,7 +39,7 @@ import java.util.Map;
 
 public class ApproveSupply extends AppCompatActivity {
 
-    private TextView txv_requestID,txv_name,txv_items,
+    private TextView txv_requestID,txv_name,txv_items,txv_qty,
             txv_requestDate, txv_requestStatus,edt_quotation, edt_expectedDate ,txv_amount;
 
     private Button btn_submit;
@@ -65,6 +65,7 @@ public class ApproveSupply extends AppCompatActivity {
         progressBar=findViewById(R.id.progressBar);
         btn_submit=findViewById(R.id.btn_submit);
         txv_amount = findViewById(R.id.txv_prop_amount);
+        txv_qty = findViewById(R.id.txv_qty);
 
         session=new SessionHandler(getApplicationContext());
         user=session.getUserDetails();
@@ -76,11 +77,12 @@ public class ApproveSupply extends AppCompatActivity {
 
 
         txv_requestID.setText("Tender No: "+in.getStringExtra("requestID"));
-        edt_quotation.setText("Supplier Name: "+in.getStringExtra("supplier"));
-        txv_items.setText("Tender : Supply Of "+in.getStringExtra("item"));
-        edt_expectedDate.setText("Supply Date "+in.getStringExtra("requestDate"));
-        txv_requestStatus.setText("Status "+in.getStringExtra("requestStatus"));
+        edt_quotation.setText("Supplier: "+in.getStringExtra("supplier"));
+        txv_items.setText("Supply of: "+in.getStringExtra("item"));
+        edt_expectedDate.setText("Supply Date: "+in.getStringExtra("requestDate"));
+        txv_requestStatus.setText("Status: "+in.getStringExtra("requestStatus"));
         txv_amount.setText("Invoiced Amount:"+in.getStringExtra("amount"));
+        txv_qty.setText("Quantity: "+in.getStringExtra("quantity"));
 
         btn_submit.setOnClickListener(v-> approve());
     }

@@ -104,8 +104,9 @@ public class RequestItems extends AppCompatActivity {
                                     String requestDate=jsn.getString("requestDate");
                                     String requestStatus=jsn.getString("requestStatus");
                                     String amount=jsn.getString("amount");
+                                    String quantity=jsn.getString("quantity");
                                     RequestModel rq=new RequestModel(requestID,  name,  phoneNo,
-                                             items,  requestDate,  requestStatus, amount);
+                                             items,  requestDate,  requestStatus, amount, quantity);
                                     list.add(rq);
                                 }
                                 adapter=new AdapterRequest(getApplicationContext(),list);

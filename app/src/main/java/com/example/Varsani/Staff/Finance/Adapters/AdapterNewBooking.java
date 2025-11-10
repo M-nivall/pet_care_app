@@ -1,4 +1,4 @@
-package com.example.Varsani.Clients.Adapters;
+package com.example.Varsani.Staff.Finance.Adapters;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,22 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.Varsani.Clients.InvoiceItems;
-import com.example.Varsani.Clients.OrderItems;
-import com.example.Varsani.utils.SessionHandler;
-import com.example.Varsani.Clients.Models.OrdersModal;
 import com.example.Varsani.Clients.Models.UserModel;
 import com.example.Varsani.R;
+import com.example.Varsani.Staff.Adapters.AdapterNewServPayments;
+import com.example.Varsani.Staff.Finance.BookingFeeDetails;
+import com.example.Varsani.Staff.Finance.PaymentDetails;
+import com.example.Varsani.Staff.Models.ClientOrderModel;
+import com.example.Varsani.utils.SessionHandler;
 
 import java.util.List;
 
-public class AdapterInvoices extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private List<OrdersModal> items;
+public class AdapterNewBooking extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    private List<ClientOrderModel> items;
 
     private Context ctx;
     ProgressDialog progressDialog;
@@ -46,14 +45,14 @@ public class AdapterInvoices extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //        this.onMoreButtonClickListener = onMoreButtonClickListener;
 //    }
 
-    public AdapterInvoices(Context context, List<OrdersModal> items) {
+    public AdapterNewBooking(Context context, List<ClientOrderModel> items) {
         this.items = items;
         ctx = context;
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView txv_orderID, txv_orderCost,txv_orderDate;
+        public TextView txv_orderID,txv_name, txv_orderCost,txv_orderDate;
         public TextView txv_mpesaCode,txv_orderStatus;
 
 
@@ -61,6 +60,7 @@ public class AdapterInvoices extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(v);
 
             txv_mpesaCode =v.findViewById(R.id.txv_mpesaCode);
+            txv_name =v.findViewById(R.id.txv_name);
             txv_orderID =v.findViewById(R.id.txv_orderID);
             txv_orderCost = v.findViewById(R.id.txv_orderCost);
             txv_orderStatus = v.findViewById(R.id.txv_orderStatus);
@@ -73,40 +73,47 @@ public class AdapterInvoices extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_orders, parent, false);
-        vh = new OriginalViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_client_orders, parent, false);
+        vh = new AdapterNewBooking.OriginalViewHolder(v);
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if (holder instanceof OriginalViewHolder) {
-            final OriginalViewHolder view = (OriginalViewHolder) holder;
+        if (holder instanceof AdapterNewBooking.OriginalViewHolder) {
+            final AdapterNewBooking.OriginalViewHolder view = (AdapterNewBooking.OriginalViewHolder) holder;
 
-            final OrdersModal o= items.get(position);
+            final ClientOrderModel o= items.get(position);
 
             view.txv_orderID.setText("#ID: "+o.getOrderID());
-            view.txv_orderStatus.setText("Status: " + o.getOrderstatus());
-            view.txv_orderCost.setText("Amount ksh: "+o.getOrderCost());
-            view.txv_mpesaCode.setText("Mpesa code: "+o.getMpesaCode());
+            view.txv_name.setText("Client: " + o.getClientName());
+            view.txv_orderStatus.setText("Status: " + o.getOrderStatus());
+            view.txv_orderCost.setText("Amount: Ksh "+o.getOrderCost());
+            view.txv_mpesaCode.setText("Payment Code: "+o.getMpesaCode());
             view.txv_orderDate.setText("Date: "+o.getOrderDate());
 
-            view.txv_mpesaCode.setVisibility(View.GONE);
-            //view.txv_orderDate.setVisibility(View.GONE);
+
             view.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent in=new Intent(ctx, InvoiceItems.class);
+
+                    Intent in=new Intent(ctx, BookingFeeDetails.class);
                     in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     in.putExtra("orderID", o.getOrderID());
                     in.putExtra("orderCost",o.getOrderCost());
+                    in.putExtra("clientName",o.getClientName());
                     in.putExtra("mpesaCode",o.getMpesaCode());
                     in.putExtra("orderDate",o.getOrderDate());
-                    in.putExtra("orderStatus",o.getOrderstatus());
-                    in.putExtra("itemCost",o.getItemCost());
+                    in.putExtra("orderStatus",o.getOrderStatus());
+                    in.putExtra("itemCost",o.getOrderCost());
                     in.putExtra("shippingCost",o.getShippingCost());
+                    in.putExtra("county",o.getCounty());
+                    in.putExtra("town",o.getTown());
+                    in.putExtra("address",o.getAddress());
                     ctx.startActivity(in);
+
+
                 }
             });
         }
@@ -125,6 +132,5 @@ public class AdapterInvoices extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //    public interface OnMoreButtonClickListener {
 //        void onItemClick(View view, ProductModal obj, MenuItem item);
 //    }
-
 
 }
