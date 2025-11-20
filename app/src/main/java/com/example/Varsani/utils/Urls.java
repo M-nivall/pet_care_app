@@ -119,4 +119,6 @@ public class Urls {
     public static final String URL_REQUESTS=ROOT_URL + "stock_mrg/request.php";
     public static final String URL_SERVICE_COMPLETED= ROOT_URL+"serv_mrg/service_history.php";
     public static final String URL_GET_TOOLS=ROOT_URL + "stock_mrg/tools.php";
+
+    public static final String URL_MY_PETS = ROOT_URL + "client/my_pets.php";
 }

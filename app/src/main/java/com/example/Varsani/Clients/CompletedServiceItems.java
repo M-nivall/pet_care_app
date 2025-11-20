@@ -60,7 +60,6 @@ public class CompletedServiceItems extends AppCompatActivity {
     private UserModel user;
 
     private ProgressBar progressBar,progressBar1;
-    private RecyclerView recyclerView;
     private CardView rateLayout;
     private TextView tv_bookingID,tv_service,tv_pet,tv_booking_status,txv_amount_paid,txv_payment_code,
             tv_booking_date,tv_name,txv_payment_status;
@@ -81,7 +80,6 @@ public class CompletedServiceItems extends AppCompatActivity {
         getSupportActionBar().setTitle("Completed Services");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recyclerView=findViewById(R.id.recyclerView);
         progressBar=findViewById(R.id.progressBar);
         progressBar1=findViewById(R.id.progressBar1);
         rating_bar=findViewById(R.id.rating_bar);
@@ -116,7 +114,7 @@ public class CompletedServiceItems extends AppCompatActivity {
 
         final Intent intent = getIntent();
 
-        String orderID       = intent.getStringExtra("orderID");
+        orderID       = intent.getStringExtra("orderID");
         String orderCost     = intent.getStringExtra("orderCost");
         String clientName    = intent.getStringExtra("clientName");
         String mpesaCode     = intent.getStringExtra("mpesaCode");
@@ -145,12 +143,6 @@ public class CompletedServiceItems extends AppCompatActivity {
         txv_payment_code.setText("Payment Code: " + mpesaCode);
         txv_payment_status.setText("Status: Paid");
 
-        //txv_shippingCost.setText("Shipping cost "+shippingCost);
-        // txv_itemCost.setText("Item cost "+itemCost);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getApplicationContext(),1);
-        recyclerView.setLayoutManager(layoutManager);
 
         session=new SessionHandler( getApplicationContext());
         user=session.getUserDetails();
@@ -186,7 +178,6 @@ public class CompletedServiceItems extends AppCompatActivity {
             }
         });
 
-        getOrderItems();
 
     }
     @Override
@@ -247,58 +238,6 @@ public class CompletedServiceItems extends AppCompatActivity {
             }
         });
         dialog.show();
-    }
-    public void getOrderItems(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.URL_GET_ORDER_ITEMS2,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-                            Log.e("Response"," "+response);
-                            JSONObject jsonObject=new JSONObject(response);
-                            String status=jsonObject.getString("status");
-                            if(status.equals("1")){
-                                JSONArray jsonArray=jsonObject.getJSONArray("items");
-                                for(int i=0; i <jsonArray.length();i++){
-                                    JSONObject jsn=jsonArray.getJSONObject(i);
-                                    String itemName = jsn.getString("itemName");
-                                    String itemPrice = jsn.getString("itemPrice");
-                                    String quantity = jsn.getString("quantity");
-                                    String subTotal = jsn.getString("subTotal");
-
-                                    OrderItemModal orderItemModal = new OrderItemModal(itemName, itemPrice, quantity, subTotal);
-                                    list.add(orderItemModal);
-                                    Log.e("Array","" +itemName);
-
-                                }
-                            }
-                            progressBar.setVisibility(View.GONE);
-                            adapterCompletedItems=new AdapterCompletedItems(getApplicationContext(),list);
-                            recyclerView.setAdapter(adapterCompletedItems);
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError {
-                Map<String,String> params =new HashMap<>();
-                params.put("orderID",orderID);
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
     }
 
     public void getAlert(View v){
@@ -387,7 +326,7 @@ public class CompletedServiceItems extends AppCompatActivity {
     }
 
     public void markComplete(){
-        btn_mark_order.setVisibility(View.GONE);
+        btn_mark_complete.setVisibility(View.GONE);
         progressBar1.setVisibility(View.VISIBLE);
 
         final Float ratingValue = rating_bar.getRating();
@@ -417,7 +356,7 @@ public class CompletedServiceItems extends AppCompatActivity {
 
                         }catch (Exception e){
                             e.printStackTrace();
-                            btn_mark_order.setVisibility(View.GONE);
+                            btn_mark_complete.setVisibility(View.GONE);
                             progressBar1.setVisibility(View.GONE);
                             Toast toast= Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.TOP,0,250);
@@ -432,7 +371,7 @@ public class CompletedServiceItems extends AppCompatActivity {
                 Toast toast= Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP,0,250);
                 toast.show();
-                btn_mark_order.setVisibility(View.VISIBLE);
+                btn_mark_complete.setVisibility(View.VISIBLE);
                 progressBar1.setVisibility(View.GONE);
 
             }
@@ -441,14 +380,6 @@ public class CompletedServiceItems extends AppCompatActivity {
             protected Map<String,String>getParams()throws AuthFailureError{
                 Map<String,String>params=new HashMap<>();
                 params.put("orderID",orderID);
-                params.put("clientID",user.getClientID());
-                params.put("mpesaCode",code);
-                params.put("countyID",orderID);
-                params.put("address",code);
-                params.put("totalCost",itemCost);
-                params.put("orderCost",orderCost);
-                params.put("shippingCost",shippingCost);
-                params.put("townName",code);
                 params.put("rating", String.valueOf(ratingValue));
                 params.put("review",review);
 

@@ -75,38 +75,41 @@ public class CompletedServices extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void orders(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.URL_GET_INVOICE,
+    public void orders() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.URL_GET_INVOICE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject jsonObject=new JSONObject(response);
-                            String status=jsonObject.getString("status");
-                            String msg=jsonObject.getString("message");
-                            if(status.equals("1")){
-                                JSONArray jsonArray=jsonObject.getJSONArray("orders");
+                            JSONObject jsonObject = new JSONObject(response);
+                            String status = jsonObject.getString("status");
+                            String msg = jsonObject.getString("message");
 
-                                for(int i=0; i <jsonArray.length();i++){
-                                    JSONObject jsn=jsonArray.getJSONObject(i);
-                                    String orderID=jsn.getString("orderID");
-                                    String clientName=jsn.getString("clientName");
-                                    String mpesaCode=jsn.getString("mpesaCode");
-                                    String orderCost=jsn.getString("orderCost");
-                                    String orderStatus=jsn.getString("orderStatus");
-                                    String orderDate=jsn.getString("orderDate");
-                                    String shippingCost=jsn.getString("shippingCost");
-                                    String itemCost=jsn.getString("itemCost");
-                                    String county=jsn.getString("county");
-                                    String town=jsn.getString("town");
-                                    String address=jsn.getString("address");
+                            if (status.equals("1")) {
 
-                                    String serviceName=jsn.getString("serviceName");
-                                    String serviceFee=jsn.getString("serviceFee");
-                                    String petName=jsn.getString("petName");
-                                    String serviceDate=jsn.getString("serviceDate");
+                                JSONArray jsonArray = jsonObject.getJSONArray("details"); // FIXED!
 
-                                    ServiceBookingModel serviceBookingModel = new ServiceBookingModel(
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsn = jsonArray.getJSONObject(i);
+
+                                    String orderID = jsn.getString("orderID");
+                                    String clientName = jsn.getString("clientName");
+                                    String mpesaCode = jsn.getString("mpesaCode");
+                                    String orderCost = jsn.getString("orderCost");
+                                    String orderStatus = jsn.getString("orderStatus");
+                                    String orderDate = jsn.getString("orderDate");
+                                    String shippingCost = jsn.getString("shippingCost");
+                                    String itemCost = jsn.getString("itemCost");
+                                    String county = jsn.getString("county");
+                                    String town = jsn.getString("town");
+                                    String address = jsn.getString("address");
+
+                                    String serviceName = jsn.getString("serviceName");
+                                    String serviceFee = jsn.getString("serviceFee");
+                                    String petName = jsn.getString("petName");
+                                    String serviceDate = jsn.getString("serviceDate");
+
+                                    ServiceBookingModel model = new ServiceBookingModel(
                                             orderID,
                                             clientName,
                                             mpesaCode,
@@ -123,41 +126,45 @@ public class CompletedServices extends AppCompatActivity {
                                             petName,
                                             serviceDate
                                     );
-                                    list.add(serviceBookingModel);
-
+                                    list.add(model);
                                 }
-                                adapterCompletedServices=new AdapterCompletedServices(getApplicationContext(),list);
+
+                                adapterCompletedServices = new AdapterCompletedServices(getApplicationContext(), list);
                                 recyclerView.setAdapter(adapterCompletedServices);
                                 progressBar.setVisibility(View.GONE);
-                            }else if(status.equals("0")){
-                                progressBar.setVisibility(View.GONE);
 
-                                Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+                            } else {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                             }
 
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
-                            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
-                }, new Response.ErrorListener() {
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams()throws  AbstractMethodError{
-                Map<String,String> params=new HashMap<>();
-                params.put("clientID",user.getClientID());
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("clientID", user.getClientID());
                 return params;
             }
         };
-        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
+
     @Override
     public void onRestart()
     {

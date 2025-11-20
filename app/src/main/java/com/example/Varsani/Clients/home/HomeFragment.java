@@ -33,6 +33,7 @@ import com.example.Varsani.Clients.Adapters.AdapterServices;
 import com.example.Varsani.Clients.CartItems;
 import com.example.Varsani.Clients.Help_in;
 import com.example.Varsani.Clients.Models.ServicesModal;
+import com.example.Varsani.Clients.MyPets;
 import com.example.Varsani.Clients.RegisterPet;
 import com.example.Varsani.MainActivity;
 import com.example.Varsani.utils.SessionHandler;
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment {
     private AdapterServices adapterServices;
     private ImageView help,home;
     private ImageView cart;
-    private Button btn_register_pet;
+    private Button btn_register_pet, btn_my_pets;
     private RecyclerView recyclerView ,recyclerView2 ,recyclerview3;
     private ProgressBar progressBar,progressBar3;
 
@@ -72,6 +73,7 @@ public class HomeFragment extends Fragment {
         cart = root.findViewById(R.id.imgcart);
         help= root.findViewById(R.id.imghelp);
         btn_register_pet = root.findViewById(R.id.btn_register_pet);
+        btn_my_pets = root.findViewById(R.id.btn_my_pets);
 
 
         cart.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +98,15 @@ public class HomeFragment extends Fragment {
                 startActivity(ght);
             }
         });
+
+        btn_my_pets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ght = new Intent(getContext(), MyPets.class);
+                startActivity(ght);
+            }
+        });
+
 
         recyclerView.setLayoutManager( new LinearLayoutManager( getContext()));
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
