@@ -1,66 +1,54 @@
 package com.example.Varsani.Staff.ServMrg;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.Varsani.Staff.Models.ClientItemsModal;
 import com.example.Varsani.R;
-import com.example.Varsani.Staff.Adapters.AdapterClientItems;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.example.Varsani.utils.Urls.URL_ASSIGN_TECH;
-import static com.example.Varsani.utils.Urls.URL_GET_CLIENT_ITEMS;
-import static com.example.Varsani.utils.Urls.URL_GET_DRIVERS;
-import static com.example.Varsani.utils.Urls.URL_GET_TECHNICIANS;
-import static com.example.Varsani.utils.Urls.URL_QUOTATION_ITEMS;
-import static com.example.Varsani.utils.Urls.URL_SHIP_ORDER;
+import static com.example.Varsani.utils.Urls.URL_GET_GROOMERS;
+import static com.example.Varsani.utils.Urls.URL_GET_TRAINERS;
+import static com.example.Varsani.utils.Urls.URL_GET_VET;
 
 public class QuotItems extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private ProgressBar progressBar,progressBar1;
-    private TextView txv_name,txv_orderID,txv_orderStatus,
-            txv_orderDate,txv_address,txv_town,
-            txv_county,txv_mpesaCode;
-    private List<ClientItemsModal> list;
-    private AdapterClientItems adapterClientItems;
-    private RelativeLayout layout_bottom;
+
+    private TextView txv_name, txv_orderID, txv_orderStatus, txv_orderDate,
+            txv_serviceFee, txv_address, txv_town,
+            txv_county, txv_mpesaCode;
+    private TextView txv_serviceName, txv_serviceDate, txv_petName;
     private Button btn_ship;
-    private ArrayList<String> drivers;
-    private EditText edt_driver;
+    private ArrayList<String> staffList;
+    private EditText edt_vet;
 
     String orderID;
     String orderStatus;
+    String serviceName; // service type passed via intent
+    String selectedStaffApiUrl; // chosen endpoint
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,75 +56,77 @@ public class QuotItems extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        layout_bottom=findViewById(R.id.layout_bottom);
-        progressBar=findViewById(R.id.progressBar);
-        progressBar1=findViewById(R.id.progressBar1);
-        recyclerView=findViewById(R.id.recyclerView);
-        txv_address=findViewById(R.id.txv_address);
-        txv_town=findViewById(R.id.txv_town);
-        txv_county=findViewById(R.id.txv_county);
-        txv_name=findViewById(R.id.txv_name);
-        txv_mpesaCode=findViewById(R.id.txv_mpesaCode);
-        txv_orderStatus=findViewById(R.id.txv_orderStatus);
-        txv_orderID=findViewById(R.id.txv_orderID);
-        txv_orderDate=findViewById(R.id.txv_orderDate);
-        btn_ship=findViewById(R.id.btn_submit);
-        edt_driver=findViewById(R.id.edt_driver);
+        // views
+        txv_address = findViewById(R.id.txv_address);
+        txv_town = findViewById(R.id.txv_town);
+        txv_county = findViewById(R.id.txv_county);
+        txv_name = findViewById(R.id.txv_name);
+        txv_mpesaCode = findViewById(R.id.txv_mpesaCode);
+        txv_orderStatus = findViewById(R.id.txv_orderStatus);
+        txv_serviceFee = findViewById(R.id.txv_serviceFee);
+        txv_serviceName = findViewById(R.id.txv_serviceName);
+        txv_petName = findViewById(R.id.txv_petName);
+        txv_serviceDate = findViewById(R.id.txv_serviceDate);
+        txv_orderID = findViewById(R.id.txv_orderID);
+        txv_orderDate = findViewById(R.id.txv_orderDate);
 
-        layout_bottom.setVisibility(View.GONE);
-        progressBar1.setVisibility(View.GONE);
-        edt_driver.setFocusable(false);
-//        edt_driver.setEnabled(false);
+        btn_ship = findViewById(R.id.btn_submit);
+        edt_vet = findViewById(R.id.edt_staff);
 
-        drivers=new ArrayList<>();
+        // receive intent data
+        Intent intent = getIntent();
 
-        Intent intent=getIntent();
+        orderID = intent.getStringExtra("orderID");
+        String orderDate = intent.getStringExtra("orderDate");
+        orderStatus = intent.getStringExtra("orderStatus");
+        String orderCost = intent.getStringExtra("orderCost");
+        String shippingCost = intent.getStringExtra("shippingCost");
+        String itemCost = intent.getStringExtra("itemCost");
+        String mpesaCode = intent.getStringExtra("mpesaCode");
+        String clientName = intent.getStringExtra("clientName");
+        String address = intent.getStringExtra("address");
+        String town = intent.getStringExtra("town");
+        String county = intent.getStringExtra("county");
 
-        orderID=intent.getStringExtra("orderID");
-        String orderDate=intent.getStringExtra("orderDate");
-        orderStatus=intent.getStringExtra("orderStatus");
-        String clientName=intent.getStringExtra("clientName");
-        String address=intent.getStringExtra("address");
-        String town=intent.getStringExtra("town");
-        String county=intent.getStringExtra("county");
+        serviceName = intent.getStringExtra("serviceName"); // IMPORTANT
+        String serviceFee = intent.getStringExtra("serviceFee");
+        String pet = intent.getStringExtra("pet");
+        String serviceDate = intent.getStringExtra("serviceDate");
 
-        txv_orderDate.setText(" Order date " + orderDate);
-        txv_orderStatus.setText(orderStatus );
-        txv_name.setText("Name " +clientName );
-        txv_town.setText(town );
-        txv_county.setText(county+"-"+town );
-        txv_address.setText("Address " +address );
-        txv_orderID.setText("Order ID " +orderID );
+        // populate UI
+        txv_orderDate.setText("Date : " + orderDate);
+        txv_orderStatus.setText("Status: " + orderStatus);
+        txv_mpesaCode.setText("Payment Code : " + mpesaCode);
+        txv_serviceFee.setText("Service Fee: ksh " + serviceFee);
+        txv_name.setText("Client: " + clientName);
+        txv_town.setText("Town: " + town);
+        txv_county.setText("County: " + county);
+        txv_address.setText("Address: " + address);
+        txv_orderID.setText("#Booking ID: " + orderID);
 
+        txv_serviceName.setText("Service: " + serviceName);
+        txv_serviceDate.setText("Service Date: " + serviceDate);
+        txv_petName.setText("Pet: " + pet);
 
-        txv_orderDate.setVisibility(View.GONE);
-        txv_town.setVisibility(View.GONE);
+        // make edt non-editable (picker style)
+        edt_vet.setFocusable(false);
 
-        list=new ArrayList<>();
+        // init list
+        staffList = new ArrayList<>();
 
-        recyclerView.setLayoutManager( new LinearLayoutManager(getApplicationContext()));
-        RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getApplicationContext(),1);
-        recyclerView.setLayoutManager(layoutManager);
+        // pick staff when click on the EditText
+        edt_vet.setOnClickListener(v -> showStaffPicker());
 
-        edt_driver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getAlertDrivers(v);
-            }
-        });
+        // assign button
+        btn_ship.setOnClickListener(v -> getAlertShip(v));
 
+        // select which staff API to use based on service
+        selectStaffCategory(serviceName);
 
-
-        btn_ship.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getAlertShip(v);
-            }
-        });
-
-        getClientItems();
-        getDrivers();
+        // fetch staff for the selected category
+        getStaffByServiceType();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -144,207 +134,175 @@ public class QuotItems extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    public void getClientItems(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_QUOTATION_ITEMS,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
 
-                        try {
-                            Log.e("RESPONSE", response);
-                            JSONObject jsonObject=new JSONObject(response);
-                            String status=jsonObject.getString("status");
-                            String msg=jsonObject.getString("message");
+    /**
+     * Choose API URL based on service name.
+     * Expects serviceName to be "Vaccination", "Grooming" or "Training"
+     */
+    private void selectStaffCategory(String serviceName) {
+        if (serviceName == null) {
+            // fallback to vets
+            selectedStaffApiUrl = URL_GET_VET;
+            return;
+        }
 
-                            if(status.equals("1")){
-                                JSONArray jsonArray=jsonObject.getJSONArray("details");
-                                for(int i=0; i <jsonArray.length();i++){
-                                    JSONObject jsn=jsonArray.getJSONObject(i);
-                                    String itemName=jsn.getString("itemName");
-                                    String quantity=jsn.getString("quantity");
-                                    String itemPrice=jsn.getString("itemPrice");
-                                    String subTotal=jsn.getString("subTotal");
-                                    ClientItemsModal clientItemsModal=new ClientItemsModal(itemName,itemPrice,quantity,subTotal);
-                                    list.add(clientItemsModal);
-                                }
-                                adapterClientItems=new AdapterClientItems(getApplicationContext(),list);
-                                recyclerView.setAdapter(adapterClientItems);
-                                progressBar.setVisibility(View.GONE);
-                                if(orderStatus.equals("Pending Technician Assignment")){
-                                    layout_bottom.setVisibility(View.VISIBLE);
-                                }
+        String s = serviceName.trim().toLowerCase();
+        if (s.contains("Vaccination") || s.equalsIgnoreCase("Vaccination")) {
+            selectedStaffApiUrl = URL_GET_VET;
+        } else if (s.contains("grooming")) {
+            selectedStaffApiUrl = URL_GET_GROOMERS;
+        } else if (s.contains("training")) {
+            selectedStaffApiUrl = URL_GET_TRAINERS;
+        } else {
+            // default fallback
+            selectedStaffApiUrl = URL_GET_VET;
+        }
+    }
 
-                            }else{
-                                progressBar.setVisibility(View.GONE);
-                                Toast toast=Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.TOP,0,250);
-                                toast.show();
+    /**
+     * Fetch staff list (vets/groomers/trainers) from server
+     */
+    public void getStaffByServiceType() {
+        if (selectedStaffApiUrl == null || selectedStaffApiUrl.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No staff endpoint configured", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, selectedStaffApiUrl,
+                response -> {
+                    try {
+                        Log.e("RESPONSE", response);
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        if (status.equals("1")) {
+                            JSONArray jsonArray = jsonObject.getJSONArray("details");
+                            staffList.clear();
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsn = jsonArray.getJSONObject(i);
+                                String username = jsn.getString("username");
+                                staffList.add(username);
                             }
-
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Toast toast=Toast.makeText(getApplicationContext(), e.toString(),Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP,0,250);
+                        } else {
+                            // no staff or message
+                            String msg = jsonObject.optString("message", "No staff available");
+                            Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 250);
                             toast.show();
                         }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.TOP, 0, 250);
+                        toast.show();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast toast=Toast.makeText(getApplicationContext(), error.toString(),Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP,0,250);
-                toast.show();
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError {
-                Map<String,String> params =new HashMap<>();
-                params.put("orderID",orderID);
-                Log.e("Params",""+ params);
-                return  params;
-            }
-        };
-        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+                }, error -> {
+            error.printStackTrace();
+            Toast toast = Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 250);
+            toast.show();
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Show staff picker dialog (single choice)
+     */
+    public void showStaffPicker() {
+        if (staffList.isEmpty()) {
+            // If not yet loaded, fetch and notify user
+            Toast toast = Toast.makeText(getApplicationContext(), "Loading staff, please wait...", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 250);
+            toast.show();
+            getStaffByServiceType();
+            return;
+        }
 
-    public void shipOrder(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final String[] array = staffList.toArray(new String[0]);
 
-        final String username=edt_driver.getText().toString().trim();
+        builder.setTitle("Select Staff");
+        builder.setNegativeButton("Close", null);
+        builder.setSingleChoiceItems(array, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                edt_vet.setText(array[i]);
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+    }
 
-        if(TextUtils.isEmpty(username)){
-            Toast toast= Toast.makeText(getApplicationContext(), "Please select a Technician", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP,0,250);
+    /**
+     * Confirmation dialog before assigning
+     */
+    public void getAlertShip(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setTitle("Assign Services?");
+        builder.setNegativeButton("Cancel", null);
+        builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                shipOrder();
+            }
+        });
+        builder.show();
+    }
+
+    /**
+     * Perform assignment to selected staff (POST to server)
+     */
+    public void shipOrder() {
+
+        final String username = edt_vet.getText().toString().trim();
+
+        if (username.isEmpty()) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Please select a Technician", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 250);
             toast.show();
             return;
         }
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_ASSIGN_TECH,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
 
-                        try {
-                            Log.e("RESPONSE",response);
-                            JSONObject jsonObject=new JSONObject(response);
-                            String status=jsonObject.getString("status");
-                            String msg=jsonObject.getString("message");
-                            if (status.equals("1")){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ASSIGN_TECH,
+                response -> {
+                    try {
+                        Log.e("RESPONSE", response);
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        String msg = jsonObject.getString("message");
+                        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.TOP, 0, 250);
+                        toast.show();
 
-                                Toast toast= Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.TOP,0,250);
-                                toast.show();
-                                finish();
-                            }else{
-
-                                Toast toast= Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.TOP,0,250);
-                                toast.show();
-                            }
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Toast toast= Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP,0,250);
-                            toast.show();
+                        if (status.equals("1")) {
+                            finish();
                         }
 
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast toast = Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.TOP, 0, 250);
+                        toast.show();
                     }
-                }, new Response.ErrorListener() {
+                }, error -> {
+            error.printStackTrace();
+            Toast toast = Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 250);
+            toast.show();
+        }) {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast toast= Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP,0,250);
-                toast.show();
-            }
-        }){
-            @Override
-            protected Map<String,String>getParams()throws AuthFailureError{
-                Map<String,String> params=new HashMap<>();
-                params.put("orderID",orderID);
-                params.put("username",username);
-                Log.e("PARAMS",""+params);
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("orderID", orderID);
+                params.put("username", username);
+                params.put("service", serviceName != null ? serviceName : "");
+                Log.e("PARAMS", "" + params);
                 return params;
             }
         };
-        RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
-    }
-
-    public void getDrivers(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_GET_TECHNICIANS,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try{
-                            Log.e("RESPONSE", response);
-                            JSONObject jsonObject=new JSONObject(response);
-                            String status=jsonObject.getString("status");
-                            String msg=jsonObject.getString("message");
-                            if(status.equals("1")){
-                                JSONArray jsonArray=jsonObject.getJSONArray("details");
-                                for(int i=0;i <jsonArray.length();i++){
-                                    JSONObject jsn=jsonArray.getJSONObject(i);
-                                    String username=jsn.getString("username");
-                                    drivers.add(username);
-                                }
-                            }
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Toast toast= Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP, 0,250);
-                            toast.show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast toast= Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0,250);
-                toast.show();
-            }
-        });
-        RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-    }
-
-    public void getAlertDrivers(View v){
-        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-//        builder.setTitle("Select county ");
-        final String[] array = drivers.toArray(new String[drivers.size()]);
-        builder.setNegativeButton("Close",null);
-        builder.setSingleChoiceItems( array, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                edt_driver.setText(array[i]);
-                dialogInterface.dismiss();
-
-            }
-        });
-        builder.show();
-
-    }
-
-    public void getAlertShip(View v){
-        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-        builder.setTitle("Assign Selected Technician to Site Visit?");
-        final String[] array = drivers.toArray(new String[drivers.size()]);
-        builder.setNegativeButton("Cancel",null);
-        builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-
-                shipOrder();
-
-                return;
-            }
-        });
-        builder.show();
-
     }
 }

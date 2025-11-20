@@ -1,167 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F5F5F5"
     tools:context=".Staff.ServMrg.QuotItems">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="12dp">
+        android:padding="14dp"
+        android:clipToPadding="false">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp">
+            android:orientation="vertical"
+            android:paddingBottom="120dp">
 
-            <LinearLayout
+            <!-- Payment Details Card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="20dp">
+                android:layout_marginBottom="16dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="14dp">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_payment"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:elevation="8dp"
-                    android:padding="10dp"
-                    app:cardElevation="10dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardBackgroundColor="@color/white">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="10dp">
+                        android:text="Payment Details"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#222"
+                        android:gravity="center"
+                        android:paddingBottom="10dp" />
 
-                        <TextView
-                            android:id="@+id/txv_details"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:paddingBottom="10dp"
-                            android:text="Details"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorBlack" />
+                    <TextView
+                        android:id="@+id/txv_orderID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order ID"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
 
-                        <TextView
-                            android:id="@+id/txv_orderID"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="OrderID"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/txv_mpesaCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mpesa Code"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
 
-                        <TextView
-                            android:id="@+id/txv_orderDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Order Date"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/txv_serviceFee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Amount"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
 
-                        <TextView
-                            android:id="@+id/txv_orderStatus"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:paddingBottom="6dp"
-                            android:text="Order Status"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/txv_orderDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order Date"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginVertical="6dp"
-                            android:background="@android:color/darker_gray" />
+                    <TextView
+                        android:id="@+id/txv_orderStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order Status"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
 
-                        <TextView
-                            android:id="@+id/txv_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Name"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            android:id="@+id/txv_county"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="County"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+            <!-- Service Details Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="14dp">
 
-                        <TextView
-                            android:id="@+id/txv_town"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Town"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txv_address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:paddingBottom="10dp"
-                            android:text="Address"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:scrollbars="vertical"
-                    android:visibility="visible"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Service Details"
+                        android:textColor="#222"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:paddingBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/txv_serviceName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Service Name"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_serviceDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Service Date"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_petName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pet Name"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Client Details Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:visibility="gone" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Client Details"
+                        android:textColor="#222"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:paddingBottom="10dp" />
 
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/txv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_county"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="County"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_town"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Town"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:indeterminate="true"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"/>
+
+        </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
+
 
     <RelativeLayout
         android:id="@+id/layout_bottom"
@@ -171,10 +232,10 @@
         android:padding="12dp">
 
         <EditText
-            android:id="@+id/edt_driver"
+            android:id="@+id/edt_staff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Choose Technician"
+            android:hint="Choose Staff"
             android:textSize="16sp"
             android:padding="12dp"
             android:background="@drawable/edittext_background1"
@@ -187,7 +248,7 @@
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_driver"
+            android:layout_below="@+id/edt_staff"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -207,4 +268,6 @@
             android:visibility="gone" />
 
     </RelativeLayout>
+
 </RelativeLayout>
+

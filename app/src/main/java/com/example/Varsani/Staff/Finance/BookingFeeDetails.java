@@ -49,16 +49,12 @@ import java.util.Map;
 
 public class BookingFeeDetails extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private TextView txv_name,txv_orderID,txv_orderStatus,txv_orderDate,
             txv_serviceFee,txv_address,txv_town,
             txv_county,txv_mpesaCode;
     private TextView txv_serviceName, txv_serviceDate, txv_petName;
-    private List<ClientItemsModal> list;
-    private AdapterBookItems adapterBookItems;
-    private RelativeLayout layout_bottom;
-    private Button btn_appprove,btn_reject;
+    private Button btn_appprove;
 
     String orderID;
     String orderStatus;
@@ -68,10 +64,9 @@ public class BookingFeeDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_fee_details);
 
-        getSupportActionBar().setSubtitle("Booking Fee Payment Details");
+        getSupportActionBar().setSubtitle("Booking Payment Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        layout_bottom=findViewById(R.id.layout_bottom);
         progressBar=findViewById(R.id.progressBar);
         txv_address=findViewById(R.id.txv_address);
         txv_town=findViewById(R.id.txv_town);
@@ -85,7 +80,6 @@ public class BookingFeeDetails extends AppCompatActivity {
         txv_serviceDate=findViewById(R.id.txv_serviceDate);
         txv_orderID=findViewById(R.id.txv_orderID);
         txv_orderDate=findViewById(R.id.txv_orderDate);
-        layout_bottom.setVisibility(View.GONE);
         btn_appprove=findViewById(R.id.btn_submit);
         // btn_reject=findViewById(R.id.btn_reject);
         Intent intent=getIntent();
@@ -110,21 +104,17 @@ public class BookingFeeDetails extends AppCompatActivity {
         txv_orderDate.setText("Date :" + orderDate);
         txv_orderStatus.setText("Status: " + orderStatus );
         txv_mpesaCode.setText("Payment Code :" + mpesaCode);
-        txv_serviceFee.setText("Service Fee " + serviceFee);
+        txv_serviceFee.setText("Service Fee: ksh " + serviceFee);
         txv_name.setText("Client: " + clientName );
-        txv_town.setText("Town " +town );
-        txv_county.setText(county +"-"+town);
-        txv_address.setText("Address " +address );
+        txv_town.setText("Town: " +town );
+        txv_county.setText("County:" + county);
+        txv_address.setText("Address: " +address );
         txv_orderID.setText("#Booking ID: " +orderID );
 
         txv_serviceName.setText("Service: " + serviceName );
-        txv_serviceDate.setText("Serial No: " + serviceDate );
-        txv_petName.setText("Serial No: " + pet );
+        txv_serviceDate.setText("Service Date: " + serviceDate );
+        txv_petName.setText("Pet: " + pet );
 
-
-        recyclerView.setLayoutManager( new LinearLayoutManager(getApplicationContext()));
-        RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getApplicationContext(),1);
-        recyclerView.setLayoutManager(layoutManager);
 
         btn_appprove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,57 +135,63 @@ public class BookingFeeDetails extends AppCompatActivity {
 
 
     public void approveOrder(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_APPROVE_BOOKING_PAYMENTS,
+
+        // Show progress
+        progressBar.setVisibility(View.VISIBLE);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_APPROVE_BOOKING_PAYMENTS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        // Hide progress
+                        progressBar.setVisibility(View.GONE);
 
                         try {
-                            Log.e("RESPONSE",response);
-                            JSONObject jsonObject=new JSONObject(response);
-                            String status=jsonObject.getString("status");
-                            String msg=jsonObject.getString("message");
-                            if (status.equals("1")){
+                            Log.e("RESPONSE", response);
+                            JSONObject jsonObject = new JSONObject(response);
+                            String status = jsonObject.getString("status");
+                            String msg = jsonObject.getString("message");
 
-                                Toast toast= Toast.makeText(BookingFeeDetails.this, msg, Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.TOP,0,250);
-                                toast.show();
+                            Toast toast = Toast.makeText(BookingFeeDetails.this, msg, Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 250);
+                            toast.show();
+
+                            if (status.equals("1")) {
                                 finish();
-                            }else{
-
-                                Toast toast= Toast.makeText(BookingFeeDetails.this, msg, Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.TOP,0,250);
-                                toast.show();
                             }
 
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
-                            Toast toast= Toast.makeText(BookingFeeDetails.this, e.toString(), Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP,0,250);
+                            Toast toast = Toast.makeText(BookingFeeDetails.this, e.toString(), Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP, 0, 250);
                             toast.show();
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                // Hide progress
+                progressBar.setVisibility(View.GONE);
+
                 error.printStackTrace();
-                Toast toast= Toast.makeText(BookingFeeDetails.this, error.toString(), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP,0,250);
+                Toast toast = Toast.makeText(BookingFeeDetails.this, error.toString(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 250);
                 toast.show();
             }
-        }){
+        }) {
             @Override
-            protected Map<String,String>getParams()throws AuthFailureError{
-                Map<String,String> params=new HashMap<>();
-                params.put("orderID",orderID);
-                Log.e("PARAMS",""+params);
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("orderID", orderID);
+                Log.e("PARAMS", "" + params);
                 return params;
             }
         };
-        RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
+
 
     public void alertApprove(){
         android.app.AlertDialog alertDialog = new AlertDialog.Builder(this).create();

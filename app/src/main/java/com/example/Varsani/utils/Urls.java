@@ -93,7 +93,9 @@ public class Urls {
     //Service   Manager
     public static final String URL_QUOTATION_REQUEST = ROOT_URL + "serv_mrg/quot_requests.php";
     public static final String URL_QUOTATION_ITEMS = ROOT_URL + "quot_items.php";
-    public static final String URL_GET_TECHNICIANS = ROOT_URL + "serv_mrg/get_technicians.php";
+    public static final String URL_GET_VET = ROOT_URL + "serv_mrg/get_vets.php";
+    public static final String URL_GET_GROOMERS = ROOT_URL + "serv_mrg/get_groomers.php";
+    public static final String URL_GET_TRAINERS = ROOT_URL + "serv_mrg/get_trainers.php";
     public static final String URL_ASSIGN_TECH = ROOT_URL + "serv_mrg/assign_tech.php";
 
     //technician

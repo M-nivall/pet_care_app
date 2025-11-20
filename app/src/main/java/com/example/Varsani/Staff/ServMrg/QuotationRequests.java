@@ -23,6 +23,7 @@ import com.example.Varsani.Staff.Adapters.AdapterQuot;
 import com.example.Varsani.Staff.Models.OrderToShipModel;
 import com.example.Varsani.R;
 import com.example.Varsani.Staff.Adapters.AdapterOrdersToShip;
+import com.example.Varsani.Staff.Models.ServiceBookingModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +37,7 @@ import static com.example.Varsani.utils.Urls.URL_QUOTATION_REQUEST;
 public class QuotationRequests extends AppCompatActivity {
 
 
-    private List<OrderToShipModel> list;
+    private List<ServiceBookingModel> list;
     private AdapterQuot adapterQuot;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
@@ -46,7 +47,7 @@ public class QuotationRequests extends AppCompatActivity {
         setContentView(R.layout.activity_quotation_requests);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setSubtitle("Service  Requests");
+        getSupportActionBar().setSubtitle("New Service Bookings");
         recyclerView=findViewById(R.id.recyclerView);
         progressBar=findViewById(R.id.progressBar);
 
@@ -83,14 +84,40 @@ public class QuotationRequests extends AppCompatActivity {
                                     JSONObject jsn=jsonArray.getJSONObject(i);
                                     String orderID=jsn.getString("orderID");
                                     String clientName=jsn.getString("clientName");
+                                    String mpesaCode=jsn.getString("mpesaCode");
+                                    String orderCost=jsn.getString("orderCost");
                                     String orderStatus=jsn.getString("orderStatus");
                                     String orderDate=jsn.getString("orderDate");
+                                    String shippingCost=jsn.getString("shippingCost");
+                                    String itemCost=jsn.getString("itemCost");
                                     String county=jsn.getString("county");
                                     String town=jsn.getString("town");
                                     String address=jsn.getString("address");
-                                    OrderToShipModel orderToShipModel=new OrderToShipModel(orderID,clientName,
-                                            orderStatus,orderDate,county,town,address);
-                                    list.add(orderToShipModel);
+
+                                    String serviceName=jsn.getString("serviceName");
+                                    String serviceFee=jsn.getString("serviceFee");
+                                    String petName=jsn.getString("petName");
+                                    String serviceDate=jsn.getString("serviceDate");
+
+                                    ServiceBookingModel serviceBookingModel = new ServiceBookingModel(
+                                            orderID,
+                                            clientName,
+                                            mpesaCode,
+                                            orderCost,
+                                            orderStatus,
+                                            orderDate,
+                                            shippingCost,
+                                            itemCost,
+                                            county,
+                                            town,
+                                            address,
+                                            serviceName,
+                                            serviceFee,
+                                            petName,
+                                            serviceDate
+                                    );
+                                    list.add(serviceBookingModel);
+
                                 }
                                 adapterQuot=new AdapterQuot(getApplicationContext(),list);
                                 recyclerView.setAdapter(adapterQuot);

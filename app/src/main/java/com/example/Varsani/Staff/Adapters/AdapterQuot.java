@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Varsani.Staff.Models.OrderToShipModel;
+import com.example.Varsani.Staff.Models.ServiceBookingModel;
 import com.example.Varsani.Staff.ServMrg.QuotItems;
 import com.example.Varsani.Staff.ShippingMrg.ItemsToShip;
 import com.example.Varsani.utils.SessionHandler;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class AdapterQuot extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<OrderToShipModel> items;
+    private List<ServiceBookingModel> items;
 
     private Context ctx;
     ProgressDialog progressDialog;
@@ -45,7 +46,7 @@ public class AdapterQuot extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //        this.onMoreButtonClickListener = onMoreButtonClickListener;
 //    }
 
-    public AdapterQuot(Context context, List<OrderToShipModel> items) {
+    public AdapterQuot(Context context, List<ServiceBookingModel> items) {
         this.items = items;
         ctx = context;
     }
@@ -82,11 +83,11 @@ public class AdapterQuot extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder instanceof OriginalViewHolder) {
             final OriginalViewHolder view = (OriginalViewHolder) holder;
 
-            final OrderToShipModel o= items.get(position);
+            final ServiceBookingModel o= items.get(position);
 
-            view.txv_orderID.setText("Request No "+o.getOrderID());
-            view.txv_orderStatus.setText(o.getOrderStatus());
-            view.txv_orderDate.setText("Request date: "+o.getOrderDate());
+            view.txv_orderID.setText("#Booking ID: "+o.getOrderID());
+            view.txv_orderStatus.setText("Status: " + o.getOrderStatus());
+            view.txv_orderDate.setText("Service: "+o.getServiceName());
             view.txv_name.setText("Client: "+o.getClientName());
 
 
@@ -98,14 +99,22 @@ public class AdapterQuot extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     Intent in=new Intent(ctx, QuotItems.class);
                     in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     in.putExtra("orderID", o.getOrderID());
+                    in.putExtra("orderCost",o.getOrderCost());
                     in.putExtra("clientName",o.getClientName());
+                    in.putExtra("mpesaCode",o.getMpesaCode());
                     in.putExtra("orderDate",o.getOrderDate());
                     in.putExtra("orderStatus",o.getOrderStatus());
+                    in.putExtra("itemCost",o.getOrderCost());
+                    in.putExtra("shippingCost",o.getShippingCost());
                     in.putExtra("county",o.getCounty());
                     in.putExtra("town",o.getTown());
                     in.putExtra("address",o.getAddress());
-                    ctx.startActivity(in);
 
+                    in.putExtra("serviceName",o.getServiceName());
+                    in.putExtra("serviceFee",o.getServiceFee());
+                    in.putExtra("pet",o.getPetName());
+                    in.putExtra("serviceDate",o.getServiceDate());
+                    ctx.startActivity(in);
 
                 }
             });
