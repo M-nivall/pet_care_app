@@ -45,7 +45,7 @@
             android:title="@string/login" />
         <item
             android:id="@+id/nav_completion"
-            android:title="Bookings" />
+            android:title="My Bookings" />
         <item
             android:id="@+id/nav_help"
             android:title="Help" />

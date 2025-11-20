@@ -17,13 +17,9 @@
     <string name="feedback">Feedback</string>
     <string name="staff_login">Login</string>
     <string name="about">
-        Our mission is simple yet profound: to provide architects, designers, and builders with materials
-        that are authentic, durable, and sustainably sourced, ensuring every space we touch reflects both
-        timeless beauty and environmental responsibility./n /n
-        Woodways Company offers a diverse range of timber products and services. Timber products such as wooden floors,
-        kitchen cabinets, doors and frames, Wooden Veneers, pergolas, staircases, customized furniture, wardrobes,
-        fluted Panel. The company also provide services like personalized consultations and installation of those timber
-        products above. The company is located along road C, off Enterprise Road, Industrial Area, Nairobi Kenya.
+        PetStore Kenya was born as a solution to a common problem to pet-friendly households in Kenya.
+        We love our cats and dogs, but buying cat food and dog food can be an arduous chore. And too
+        often your cat’s or dog’s favourite brand is out-of-stock at your local market or veterinarian.
 
     </string>
 
@@ -45,20 +41,19 @@
     <string-array name="products">
         <item>Select Product</item>
 
-        <item>Mahogany-Wood</item>
-        <item>Red-Oak-Wood</item>
-        <item>Local-Pine-Wood</item>
-        <item>Mvule-Wood</item>
-        <item>Sudanese-Teak-Wood</item>
-        <item>Walnut-Wood</item>
-        <item>Ordinary-Plywood</item>
-        <item>American-Walnut-Plywood</item>
-        <item>Birch-Plywood</item>
-        <item>Flexible-Plywood</item>
-        <item>Mahogany-Veneer</item>
-        <item>Wanut-Veneer</item>
-        <item>Red-Oak-Veneer</item>
-        <item>Ash-Veneer</item>
+        <item>Bravecto-Tablet</item>
+        <item>Pestigon-Spot</item>
+        <item>JointGuard</item>
+        <item>Pet-D</item>
+        <item>Nexcard-Tabs</item>
+        <item>Popvet</item>
+        <item>Reflex-Care</item>
+        <item>Pride-Shampoo</item>
+        <item>Pet-Hair</item>
+        <item>Lint Roller</item>
+        <item>Frontline-Plus</item>
+        <item>Spectrum-Care</item>
+
     </string-array>
     <string name="title_activity_supplier_payments">SupplierPayments</string>
     <!-- Strings used for fragments for navigation -->

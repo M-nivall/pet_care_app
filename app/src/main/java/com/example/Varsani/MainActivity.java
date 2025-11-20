@@ -247,9 +247,9 @@ public class MainActivity extends AppCompatActivity {
                 navigationView.getMenu().findItem(R.id.nav_feedback).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_orders).setVisible(true);
-                navigationView.getMenu().findItem(R.id.nav_bookings).setVisible(true);
+                navigationView.getMenu().findItem(R.id.nav_bookings).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_completion).setVisible(true);
-                navigationView.getMenu().findItem(R.id.nav_invoice).setVisible(true);
+                navigationView.getMenu().findItem(R.id.nav_invoice).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_order_history).setVisible(true);
             }
             if (user.getUser_type().equals("Supplier")) {
