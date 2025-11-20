@@ -96,99 +96,85 @@ public class Accept extends AppCompatActivity {
 
 
         product = in.getStringExtra("item");
-        if (product.equals("Mahogany-Wood")){
-            unitprice =350;
+        if (product.equals("Bravecto-Tablet")){
+            unitprice =1800;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"units");
         }
-        if (product.equals("Red-Oak-Wood")){
-            unitprice = 450;
+        if (product.equals("Pestigon-Spot")){
+            unitprice = 1500;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"units");
         }
-        if (product.equals("Local-Pine-Wood")){
-            unitprice =300;
+        if (product.equals("JointGuard")){
+            unitprice =700;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"units");
         }
-        if (product.equals("Mvule-Wood")){
+        if (product.equals("Pet-D")){
+            unitprice = 150;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Nexcard-Tabs")){
+            unitprice = 2800;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Popvet")){
+            unitprice = 200;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Reflex-Care")){
+            unitprice = 100;
+            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
+            totalcharge = unitprice*quantity;
+            edt_amount.setText("Total Amount: Kes"+totalcharge);
+            txt_quantity.setText("Quantity:"+quantity+"unit");
+        }
+        if (product.equals("Pride-Shampoo")){
             unitprice = 300;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"unit");
         }
-        if (product.equals("Sudanese-Teak-Wood")){
-            unitprice = 500;
+        if (product.equals("Pet-Hair")){
+            unitprice = 1800;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"unit");
         }
-        if (product.equals("Walnut-Wood")){
-            unitprice = 450;
-            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
-            totalcharge = unitprice*quantity;
-            edt_amount.setText("Total Amount: Kes"+totalcharge);
-            txt_quantity.setText("Quantity:"+quantity+"unit");
-        }
-        if (product.equals("Ordinary-Plywood")){
+        if (product.equals("Lint Roller")){
             unitprice = 400;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"unit");
         }
-        if (product.equals("American-Walnut-Plywood")){
-            unitprice = 550;
+        if (product.equals("Frontline-Plus")){
+            unitprice = 2000;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);
             txt_quantity.setText("Quantity:"+quantity+"unit");
         }
-        if (product.equals("Birch-Plywood")){
-            unitprice = 600;
-            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
-            totalcharge = unitprice*quantity;
-            edt_amount.setText("Total Amount: Kes"+totalcharge);
-            txt_quantity.setText("Quantity:"+quantity+"unit");
-        }
-        if (product.equals("Flexible-Plywood")){
-            unitprice = 250;
-            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
-            totalcharge = unitprice*quantity;
-            edt_amount.setText("Total Amount: Kes"+totalcharge);
-            txt_quantity.setText("Quantity:"+quantity+"unit");
-        }
-        if (product.equals("Mahogany-Veneer")){
-            unitprice = 300;
-            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
-            totalcharge = unitprice*quantity;
-            edt_amount.setText("Total Amount: Kes"+totalcharge);
-            txt_quantity.setText("Quantity:"+quantity+"unit");
-        }
-        if (product.equals("Wanut-Veneer")){
-            unitprice = 350;
-            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
-            totalcharge = unitprice*quantity;
-            edt_amount.setText("Total Amount: Kes"+totalcharge);
-            txt_quantity.setText("Quantity:"+quantity+"unit");
-        }
-        if (product.equals("Red-Oak-Veneer")){
-            unitprice = 750;
-            txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
-            totalcharge = unitprice*quantity;
-            edt_amount.setText("Total Amount: Kes"+totalcharge);
-            txt_quantity.setText("Quantity:"+quantity+"unit");
-        }
-        if (product.equals("Ash-Veneer")){
-            unitprice = 300;
+        if (product.equals("Spectrum-Care")){
+            unitprice = 450;
             txt_unitprice.setText("Price: Kes "+unitprice+"/unit");
             totalcharge = unitprice*quantity;
             edt_amount.setText("Total Amount: Kes"+totalcharge);

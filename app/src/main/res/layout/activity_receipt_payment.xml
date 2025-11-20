@@ -39,7 +39,7 @@
                 android:id="@+id/tv_company_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Woodways Payment Receipt"
+                android:text="PetCare Payment Receipt"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -49,7 +49,7 @@
                 android:id="@+id/tv_company_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enterprise Road, Industrial Area, Nairobi."
+                android:text="Ring' Road, Nairobi."
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:gravity="center" />
@@ -58,7 +58,7 @@
                 android:id="@+id/tv_company_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact: +254 733 374 022"
+                android:text="Contact: +254 733 200 002"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:gravity="center" />
@@ -152,7 +152,7 @@
                 android:id="@+id/tv_footer_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="For inquiries, contact info@woodwayskenya.com"
+                android:text="For inquiries, contact info@petcare.com"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:gravity="center" />

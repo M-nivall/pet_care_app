@@ -30,7 +30,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:contentDescription="Woodways Logo"
-                android:src="@drawable/woodways_logo"
+                android:src="@drawable/pet_logo"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@android:color/transparent"
                 android:scaleType="fitCenter"/>
