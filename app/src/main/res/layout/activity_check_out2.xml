@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.Varsani.Clients.CheckOut">
+    tools:context="com.example.Varsani.Clients.CheckOut2">
+
     <RelativeLayout
+        android:id="@+id/layout_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/layout_card">
+        android:padding="8dp">
+
+        <!-- Top Progress Bar -->
         <ProgressBar
+            android:id="@+id/progressCheckout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/progressCheckout"/>
+            android:visibility="gone"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -21,258 +27,17 @@
             <LinearLayout
                 android:id="@+id/layout_checkout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="75dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="1dp">
+                android:paddingBottom="16dp">
 
+                <!-- ===== Service Details Section ===== -->
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardElevation="8dp"
-                    app:cardUseCompatPadding="true">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Your Details "
-                            android:textColor="@color/colorBlack"
-                            android:textStyle="bold|italic" />
-
-                        <TextView
-                            android:id="@+id/txv_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Name"
-                            android:textColor="@color/colorBlack"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txv_phoneNo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Phone No"
-                            android:textColor="@color/colorBlack"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txv_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="10dp"
-                            android:text="Email"
-                            android:textColor="@color/colorBlack"
-                            android:textStyle="bold" />
-
-
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@android:color/black" />
-
-                        <RadioGroup
-                            android:visibility="gone"
-                            android:id="@+id/rbtn_group"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-
-                            <RadioButton
-                                android:id="@+id/rb_no_shipping"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Within Nairobi    or  " />
-
-                            <RadioButton
-                                android:id="@+id/rb_shipping"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=" Outside Nairobi" />
-
-                        </RadioGroup>
-
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@android:color/black" />
-
-
-                        <TextView
-                            android:id="@+id/txv_shiping_cost"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Delivery cost"
-                            android:textColor="@color/colorBlack"
-                            android:textStyle="bold"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/txtmpesa"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="RC634Z8RTZ"
-                            android:textColor="@color/colorBlack"
-                            android:textStyle="bold"
-                            android:visibility="gone" />
-
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@android:color/black" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Location Information "
-                            android:textColor="@color/colorBlack"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint=" County ">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/edt_county"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint=" Town ">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/edt_town"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Apartment/Business name/Organisation Address"
-                            android:paddingBottom="10dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/edt_Address"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textPersonName" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Select Service Delivery Date"
-                            android:paddingBottom="10dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/edt_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="text" />
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <ProgressBar
-                            android:id="@+id/progressBarTown"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@android:color/black" />
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint=" County "
-                            android:visibility="gone">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/edt_county2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint=" Town "
-                            android:visibility="gone">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/edt_town2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                            <ProgressBar
-                                android:id="@+id/progressBarTown2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Apartment/Plot Name"
-                            android:paddingBottom="10dp"
-                            android:visibility="gone">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/edt_Address2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textPersonName" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@android:color/black" />
-
-
-                        <TextView
-                            android:id="@+id/txv_order_cost"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Initial cost"
-                            android:textColor="@color/colorBlack"
-                            android:textStyle="bold"
-                            android:visibility="gone" />
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_booking_payment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginHorizontal="8dp"
-                    app:cardElevation="6dp"
+                    android:layout_marginTop="8dp"
                     app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout
@@ -281,45 +46,218 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <!-- Booking Payment Title -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Service Details"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/txv_service_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Service Name"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"/>
+
+                        <TextView
+                            android:id="@+id/txv_service_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Price: KSh 0"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:id="@+id/txv_service_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Service Description"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="4dp"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- ===== Client Details Section ===== -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Your Details"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/txv_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"/>
+
+                        <TextView
+                            android:id="@+id/txv_phoneNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Phone No"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/txv_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Email"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            android:paddingBottom="8dp"/>
+
+                        <!-- Pet Selection Dropdown -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Select Your Pet"
+                            android:layout_marginTop="8dp">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/spinner_pet"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:cursorVisible="false"
+                                android:clickable="true"
+                                android:longClickable="false"
+                                android:inputType="none" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Location Fields -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="County"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_county"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Town"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_town"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Address"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Select Service Date"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="date"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- ===== Booking Payment Section ===== -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_booking_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Booking Payment"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="@color/colorPrimaryDark" />
+                            android:textColor="@color/colorPrimaryDark"/>
 
-                        <!-- Description -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Please pay the KSh 2,500 booking fee to confirm your service request."
+                            android:text="Please pay the booking fee to confirm your service."
                             android:textSize="14sp"
-                            android:textColor="@color/colorBlack"
-                            android:layout_marginTop="4dp" />
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="4dp"/>
 
-                        <!-- Booking Fee Display -->
                         <TextView
                             android:id="@+id/txtBookingAmount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Amount: KSh 2,500"
                             android:textStyle="bold"
-                            android:textColor="#1B5E20"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="16sp"
-                            android:layout_marginTop="8dp" />
+                            android:layout_marginTop="8dp"/>
 
-                        <!-- Payment Instructions -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pay to: M-PESA Till Number 123456"
                             android:textSize="14sp"
-                            android:textColor="#555"
-                            android:layout_marginTop="4dp" />
+                            android:textColor="@android:color/darker_gray"
+                            android:layout_marginTop="4dp"/>
 
-                        <!-- Reference Code Input -->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -332,37 +270,34 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="text"
                                 android:maxLength="10"
-                                android:imeOptions="actionDone" />
+                                android:imeOptions="actionDone"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- ===== Submit Booking Button BELOW CARD ===== -->
+                <Button
+                    android:id="@+id/btn_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Submit Booking"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Progress Bar Below Button -->
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone"
+                    android:layout_marginBottom="16dp" />
 
             </LinearLayout>
-
         </ScrollView>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/layout_bottom"
-            android:layout_alignParentBottom="true">
-
-            <Button
-                android:id="@+id/btn_order"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Submit Booking"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_marginTop="12dp" />
-
-            <ProgressBar
-                android:id="@id/progressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

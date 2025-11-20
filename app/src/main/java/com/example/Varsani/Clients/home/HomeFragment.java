@@ -33,6 +33,7 @@ import com.example.Varsani.Clients.Adapters.AdapterServices;
 import com.example.Varsani.Clients.CartItems;
 import com.example.Varsani.Clients.Help_in;
 import com.example.Varsani.Clients.Models.ServicesModal;
+import com.example.Varsani.Clients.RegisterPet;
 import com.example.Varsani.MainActivity;
 import com.example.Varsani.utils.SessionHandler;
 import com.example.Varsani.utils.Urls;
@@ -56,6 +57,7 @@ public class HomeFragment extends Fragment {
     private AdapterServices adapterServices;
     private ImageView help,home;
     private ImageView cart;
+    private Button btn_register_pet;
     private RecyclerView recyclerView ,recyclerView2 ,recyclerview3;
     private ProgressBar progressBar,progressBar3;
 
@@ -69,6 +71,7 @@ public class HomeFragment extends Fragment {
 
         cart = root.findViewById(R.id.imgcart);
         help= root.findViewById(R.id.imghelp);
+        btn_register_pet = root.findViewById(R.id.btn_register_pet);
 
 
         cart.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +85,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent ght = new Intent(getContext(), Help_in.class);
+                startActivity(ght);
+            }
+        });
+
+        btn_register_pet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ght = new Intent(getContext(), RegisterPet.class);
                 startActivity(ght);
             }
         });

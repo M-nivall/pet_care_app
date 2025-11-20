@@ -13,6 +13,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Clients.RegisterPet"
+            android:exported="false" />
+        <activity
             android:name=".Staff.Finance.BookingFeeDetails"
             android:exported="false" />
         <activity

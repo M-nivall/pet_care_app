@@ -96,7 +96,7 @@ public class AdapterServices extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_services, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_service_card, parent, false);
         vh = new OriginalViewHolder(v);
         return vh;
     }

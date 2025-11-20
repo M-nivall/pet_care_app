@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_pet_placeholder" />
+                android:src="@drawable/ic_pet_service" />
 
             <TextView
                 android:id="@+id/txv_title"
@@ -41,6 +41,16 @@
                 android:text="Ksh 1,000"
                 android:textColor="#FF5722"
                 android:textSize="16sp"
+                android:layout_marginTop="4dp" />
+
+            <!-- STOCK / QUANTITY TEXTVIEW ADDED HERE -->
+            <TextView
+                android:id="@+id/txv_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stock: 20"
+                android:textColor="#4CAF50"
+                android:textSize="15sp"
                 android:layout_marginTop="4dp" />
 
             <Button

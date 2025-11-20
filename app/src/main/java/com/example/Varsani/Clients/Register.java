@@ -21,7 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.Varsani.Suppliers.RegSuppliers;
 import com.example.Varsani.utils.Urls;
 import com.example.Varsani.R;
 
@@ -34,9 +33,8 @@ public class Register extends AppCompatActivity {
 
     private Button registerBtn;
     private ProgressBar progressBar;
-    private EditText edt_firstname,edt_lastname,
-            edt_username,edt_phoneNo,
-            edt_email,edt_password,edt_password_c;
+    private EditText edt_firstname, edt_lastname, edt_username, edt_phone,
+            edt_email, edt_password, edt_confirm_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +42,17 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        edt_firstname=findViewById(R.id.edt_firstname);
-        edt_username=findViewById(R.id.edt_username);
-        edt_lastname=findViewById(R.id.edt_lastname);
-        edt_phoneNo=findViewById(R.id.edt_phoneNo);
-        edt_email=findViewById(R.id.edt_email);
-        edt_password=findViewById(R.id.edt_password);
-        edt_password_c=findViewById(R.id.edt_password_c);
-        progressBar=findViewById(R.id.progressBar);
-        registerBtn=findViewById(R.id.register_btn);
+        // MATCHED EXACTLY WITH YOUR XML
+        edt_username = findViewById(R.id.edt_username);
+        edt_firstname = findViewById(R.id.edt_firstname);
+        edt_lastname = findViewById(R.id.edt_lastname);
+        edt_phone = findViewById(R.id.edt_phone);
+        edt_email = findViewById(R.id.edt_email);
+        edt_password = findViewById(R.id.edt_password);
+        edt_confirm_password = findViewById(R.id.edt_confirm_password);
+
+        progressBar = findViewById(R.id.progressBar);
+        registerBtn = findViewById(R.id.register_btn);
 
         progressBar.setVisibility(View.GONE);
 
@@ -72,108 +72,82 @@ public class Register extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void register(){
+    public void register() {
         registerBtn.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
 
         final String firstname = edt_firstname.getText().toString().trim();
         final String lastname = edt_lastname.getText().toString().trim();
         final String username = edt_username.getText().toString().trim();
-        final String phoneNo = edt_phoneNo.getText().toString().trim();
+        final String phone = edt_phone.getText().toString().trim();
         final String email = edt_email.getText().toString().trim();
         final String password = edt_password.getText().toString().trim();
-        final String password_c = edt_password_c.getText().toString().trim();
+        final String password_c = edt_confirm_password.getText().toString().trim();
 
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-
-        if(TextUtils.isEmpty(firstname)){
-            Toast.makeText(getApplicationContext(), "Enter first name", Toast.LENGTH_SHORT).show();
-            registerBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-            return;
-
-        }
-        if(TextUtils.isEmpty(lastname)){
-            Toast.makeText(getApplicationContext(), "Enter last name", Toast.LENGTH_SHORT).show();
-            registerBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-            return;
-
-        }
-
-        if(TextUtils.isEmpty(username)){
-            Toast.makeText(getApplicationContext(), "Enter username", Toast.LENGTH_SHORT).show();
-            registerBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-            return;
-
-        }
-        if(TextUtils.isEmpty(phoneNo)){
-            Toast.makeText(getApplicationContext(), "Enter phone number", Toast.LENGTH_SHORT).show();
-            registerBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-            return;
-
-        }
-        if(phoneNo.length()>10 ||phoneNo.length()<10){
-            Toast.makeText(getApplicationContext(), "Phone number should contain 10 digits", Toast.LENGTH_SHORT).show();
-            registerBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-
+        // VALIDATIONS
+        if (TextUtils.isEmpty(firstname)) {
+            showError("Enter first name");
             return;
         }
-
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(getApplicationContext(), "Enter email address", Toast.LENGTH_SHORT).show();
-            registerBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-            return;
-
-        }
-        if (!email.matches(emailPattern)){
-            Toast.makeText(getApplicationContext(), "In valid email address", Toast.LENGTH_SHORT).show();
-            registerBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
+        if (TextUtils.isEmpty(username)) {
+            showError("Enter username");
             return;
         }
-        if(TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), "Password is required", Toast.LENGTH_SHORT).show();
-            registerBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
+        if (TextUtils.isEmpty(lastname)) {
+            showError("Enter last name");
+            return;
+        }
+        if (TextUtils.isEmpty(phone)) {
+            showError("Enter phone number");
+            return;
+        }
+        if (phone.length() != 10) {
+            showError("Phone number should contain 10 digits");
+            return;
+        }
+        if (TextUtils.isEmpty(email)) {
+            showError("Enter email address");
+            return;
+        }
+        if (!email.matches(emailPattern)) {
+            showError("Invalid email address");
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            showError("Password is required");
+            return;
+        }
+        if (!password.equals(password_c)) {
+            showError("Password mismatch");
             return;
         }
 
-        if(!password.equals(password_c)) {
-            Toast.makeText(getApplicationContext(), "Password mismatch", Toast.LENGTH_SHORT).show();
-            registerBtn.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-            return;
-        }
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, Urls.URL_REG,
+        // VOLLEY POST REQUEST
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.URL_REG,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("Response","is" + response);
+                        Log.e("Response", "is " + response);
                         try {
-                            JSONObject jsonObject=new JSONObject(response);
-                            String status=jsonObject.getString("status");
-                            String msg=jsonObject.getString("message");
-                            if(status.equals("1")){
-                                Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(getApplicationContext(),Login.class);
-                                startActivity(intent);
-                                registerBtn.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }else{
-                                Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+                            JSONObject jsonObject = new JSONObject(response);
+                            String status = jsonObject.getString("status");
+                            String msg = jsonObject.getString("message");
 
-                                registerBtn.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+
+                            if (status.equals("1")) {
+                                Intent intent = new Intent(getApplicationContext(), Login.class);
+                                startActivity(intent);
                             }
+
+                            registerBtn.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+
                         } catch (Exception e) {
                             e.printStackTrace();
-                            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
                             registerBtn.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
                         }
@@ -182,27 +156,34 @@ public class Register extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                error.printStackTrace();
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
                 registerBtn.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
             }
-        })
-        {
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+
+                // ONLY MATCHING FIELDS IN YOUR XML
                 Map<String, String> params = new HashMap<>();
-                params.put("firstname",firstname);
-                params.put("lastname",lastname);
-                params.put("username",username);
-                params.put("phoneNo",phoneNo);
-                params.put("email",email);
-                params.put("password",password);
+                params.put("firstname", firstname);
+                params.put("lastname", lastname);
+                params.put("phoneNo", phone);
+                params.put("email", email);
+                params.put("username", username);
+                params.put("password", password);
+
                 return params;
             }
         };
+
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
+    }
 
+    private void showError(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+        registerBtn.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 }
