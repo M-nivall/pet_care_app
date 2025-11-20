@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.Varsani.Clients.CompletedServiceItems;
 import com.example.Varsani.Clients.InvoiceItems;
 import com.example.Varsani.Clients.OrderItems;
+import com.example.Varsani.Staff.Models.ServiceBookingModel;
 import com.example.Varsani.utils.SessionHandler;
 import com.example.Varsani.Clients.Models.OrdersModal;
 import com.example.Varsani.Clients.Models.UserModel;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class AdapterCompletedServices extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<OrdersModal> items;
+    private List<ServiceBookingModel> items;
 
     private Context ctx;
     ProgressDialog progressDialog;
@@ -47,26 +48,25 @@ public class AdapterCompletedServices extends RecyclerView.Adapter<RecyclerView.
 //        this.onMoreButtonClickListener = onMoreButtonClickListener;
 //    }
 
-    public AdapterCompletedServices(Context context, List<OrdersModal> items) {
+    public AdapterCompletedServices(Context context, List<ServiceBookingModel> items) {
         this.items = items;
         ctx = context;
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView txv_orderID, txv_orderCost,txv_orderDate;
-        public TextView txv_mpesaCode,txv_orderStatus;
+        public TextView txv_orderID, txv_amount,txv_orderDate;
+        public TextView txv_service,txv_orderStatus;
 
 
         public OriginalViewHolder(View v) {
             super(v);
 
-            txv_mpesaCode =v.findViewById(R.id.txv_mpesaCode);
             txv_orderID =v.findViewById(R.id.txv_orderID);
-            txv_orderCost = v.findViewById(R.id.txv_orderCost);
+            txv_service = v.findViewById(R.id.txv_service);
             txv_orderStatus = v.findViewById(R.id.txv_orderStatus);
             txv_orderDate = v.findViewById(R.id.txv_orderDate);
-            txv_orderID = v.findViewById(R.id.txv_orderID);
+            txv_amount = v.findViewById(R.id.txv_amount);
 
         }
     }
@@ -74,7 +74,7 @@ public class AdapterCompletedServices extends RecyclerView.Adapter<RecyclerView.
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_orders, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_booking, parent, false);
         vh = new OriginalViewHolder(v);
         return vh;
     }
@@ -85,16 +85,14 @@ public class AdapterCompletedServices extends RecyclerView.Adapter<RecyclerView.
         if (holder instanceof OriginalViewHolder) {
             final OriginalViewHolder view = (OriginalViewHolder) holder;
 
-            final OrdersModal o= items.get(position);
+            final ServiceBookingModel o= items.get(position);
 
-            view.txv_orderID.setText("Order # "+o.getOrderID());
-            view.txv_orderStatus.setText(o.getOrderstatus());
-            view.txv_orderCost.setText("Order KES "+o.getOrderCost());
-            view.txv_mpesaCode.setText("Mpesa code "+o.getMpesaCode());
-            view.txv_orderDate.setText("Date "+o.getOrderDate());
+            view.txv_orderID.setText("#Booking ID: "+o.getOrderID());
+            view.txv_orderStatus.setText("Status: " + o.getOrderStatus());
+            view.txv_amount.setText("Amount: "+o.getServiceFee());
+            view.txv_service.setText("Service: "+o.getServiceName());
+            view.txv_orderDate.setText("Booking Date: "+o.getOrderDate());
 
-            view.txv_mpesaCode.setVisibility(View.GONE);
-            view.txv_orderDate.setVisibility(View.GONE);
             view.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -102,11 +100,20 @@ public class AdapterCompletedServices extends RecyclerView.Adapter<RecyclerView.
                     in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     in.putExtra("orderID", o.getOrderID());
                     in.putExtra("orderCost",o.getOrderCost());
+                    in.putExtra("clientName",o.getClientName());
                     in.putExtra("mpesaCode",o.getMpesaCode());
                     in.putExtra("orderDate",o.getOrderDate());
-                    in.putExtra("orderStatus",o.getOrderstatus());
-                    in.putExtra("itemCost",o.getItemCost());
+                    in.putExtra("orderStatus",o.getOrderStatus());
+                    in.putExtra("itemCost",o.getOrderCost());
                     in.putExtra("shippingCost",o.getShippingCost());
+                    in.putExtra("county",o.getCounty());
+                    in.putExtra("town",o.getTown());
+                    in.putExtra("address",o.getAddress());
+
+                    in.putExtra("serviceName",o.getServiceName());
+                    in.putExtra("serviceFee",o.getServiceFee());
+                    in.putExtra("pet",o.getPetName());
+                    in.putExtra("serviceDate",o.getServiceDate());
                     ctx.startActivity(in);
                 }
             });

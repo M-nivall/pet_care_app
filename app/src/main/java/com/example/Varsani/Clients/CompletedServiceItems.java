@@ -62,8 +62,8 @@ public class CompletedServiceItems extends AppCompatActivity {
     private ProgressBar progressBar,progressBar1;
     private RecyclerView recyclerView;
     private CardView rateLayout;
-    private TextView txv_orderID,txv_orderDate,tv_order_status,
-            txv_orderStatus,txv_mapesaCose,tv_name;
+    private TextView tv_bookingID,tv_service,tv_pet,tv_booking_status,txv_amount_paid,txv_payment_code,
+            tv_booking_date,tv_name,txv_payment_status;
     private RatingBar rating_bar;
     private EditText edt_review;
 
@@ -87,12 +87,15 @@ public class CompletedServiceItems extends AppCompatActivity {
         rating_bar=findViewById(R.id.rating_bar);
 
 
-        txv_orderID=findViewById(R.id.tv_bookingID);
-        txv_orderDate=findViewById(R.id.tv_booking_date);
-        txv_orderStatus=findViewById(R.id.txv_orderStatus);
-        txv_mapesaCose=findViewById(R.id.txv_mpesaCode);
+        tv_bookingID=findViewById(R.id.tv_bookingID);
+        tv_service=findViewById(R.id.tv_service);
+        tv_pet=findViewById(R.id.tv_pet);
+        tv_booking_date=findViewById(R.id.tv_booking_date);
         tv_name=findViewById(R.id.tv_name);
-        tv_order_status=findViewById(R.id.tv_order_status);
+        tv_booking_status=findViewById(R.id.tv_booking_status);
+        txv_amount_paid=findViewById(R.id.txv_amount_paid);
+        txv_payment_code=findViewById(R.id.txv_payment_code);
+        txv_payment_status=findViewById(R.id.txv_payment_status);
         edt_review=findViewById(R.id.edt_review);
 
         btn_mark_order=findViewById(R.id.btn_mark_order);
@@ -111,20 +114,37 @@ public class CompletedServiceItems extends AppCompatActivity {
         rateLayout.setVisibility(View.GONE);
         progressBar1.setVisibility(View.GONE);
 
-        final Intent intent=getIntent();
-        orderID=intent.getStringExtra("orderID");
-        String mpesaCode=intent.getStringExtra("mpesaCode");
-        orderCost=intent.getStringExtra("orderCost");
-        String orderStatus=intent.getStringExtra("orderStatus");
-        String orderDate=intent.getStringExtra("orderDate");
-        shippingCost=intent.getStringExtra("shippingCost");
-        itemCost=intent.getStringExtra("itemCost");
+        final Intent intent = getIntent();
+
+        String orderID       = intent.getStringExtra("orderID");
+        String orderCost     = intent.getStringExtra("orderCost");
+        String clientName    = intent.getStringExtra("clientName");
+        String mpesaCode     = intent.getStringExtra("mpesaCode");
+        String orderDate     = intent.getStringExtra("orderDate");
+        String orderStatus   = intent.getStringExtra("orderStatus");
+        String itemCost      = intent.getStringExtra("itemCost");
+        String shippingCost  = intent.getStringExtra("shippingCost");
+        String county        = intent.getStringExtra("county");
+        String town          = intent.getStringExtra("town");
+        String address       = intent.getStringExtra("address");
+
+        String serviceName   = intent.getStringExtra("serviceName");
+        String serviceFee    = intent.getStringExtra("serviceFee");
+        String pet           = intent.getStringExtra("pet");
+        String serviceDate   = intent.getStringExtra("serviceDate");
 
 
-        tv_order_status.setText("Status: " + orderStatus);
-        txv_orderDate.setText("Date: "+orderDate);
-        txv_orderID.setText("Booking ID: "+orderID);
-        txv_mapesaCose.setText("Address:"+mpesaCode);
+
+        tv_pet.setText("Pet: " + pet);
+        tv_service.setText("Service: " + serviceName);
+        tv_bookingID.setText("#Booking ID: " + orderID);
+        tv_booking_date.setText("Booking Date: " + orderDate);
+
+        tv_booking_status.setText("Status: " + orderStatus);
+        txv_amount_paid.setText("Amount: " + serviceFee);
+        txv_payment_code.setText("Payment Code: " + mpesaCode);
+        txv_payment_status.setText("Status: Paid");
+
         //txv_shippingCost.setText("Shipping cost "+shippingCost);
         // txv_itemCost.setText("Item cost "+itemCost);
 

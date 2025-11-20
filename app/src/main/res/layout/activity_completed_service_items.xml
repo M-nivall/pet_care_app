@@ -79,8 +79,24 @@
                                 android:text="Booking ID"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
-                                android:textColor="@android:color/black"
-                                android:paddingBottom="4dp"/>
+                                android:textColor="@android:color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_service"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Service: Grooming"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/holo_green_dark" />
+
+                            <TextView
+                                android:id="@+id/tv_pet"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pet: Simba"
+                                android:textSize="14sp"
+                                android:textColor="@color/colorBlack"/>
 
                             <TextView
                                 android:id="@+id/tv_booking_date"
@@ -88,10 +104,10 @@
                                 android:layout_height="wrap_content"
                                 android:text="Booking Date:"
                                 android:textSize="14sp"
-                                android:textColor="@android:color/darker_gray"/>
+                                android:textColor="@color/colorBlack"/>
 
                             <TextView
-                                android:id="@+id/tv_order_status"
+                                android:id="@+id/tv_booking_status"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Status: Completed"
@@ -107,35 +123,6 @@
                         android:layout_height="1dp"
                         android:background="#000000" />
 
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Service"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="2dp"
-                        android:scrollbars="vertical"
-                        android:scrollingCache="true"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="20dp"
-                        android:background="#000000" />
-
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -145,98 +132,55 @@
                         android:text="Payment info:"
                         android:textSize="15dp"
                         android:textStyle="bold"
-                        android:visibility="gone" />
+                        android:textColor="@color/colorBlack"
+                        android:visibility="visible" />
 
                     <TextView
                         android:layout_width="match_parent"
 
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorBlack"
                         android:text="Payment Method:Mpesa"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                     <TextView
-                        android:id="@+id/txv_orderCost"
+                        android:id="@+id/txv_amount_paid"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Amount "
-                        android:visibility="gone" />
+                        android:text="Amount: "
+                        android:textColor="@color/colorBlack"
+                        android:visibility="visible" />
 
                     <TextView
-                        android:id="@+id/txv_mpesaCode"
+                        android:id="@+id/txv_payment_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Mpesa code"
-                        android:visibility="gone" />
+                        android:text="Payment code"
+                        android:textColor="@color/colorBlack"
+                        android:visibility="visible" />
 
 
                     <TextView
-                        android:id="@+id/txv_orderStatus"
+                        android:id="@+id/txv_payment_status"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginBottom="20dp"
                         android:text="Status"
-                        android:visibility="gone" />
+                        android:textColor="@color/colorBlack"
+                        android:visibility="visible" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#000000" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text="info@essajeltd.com" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginTop="5dp"
-                                android:text="www.essajeeamijeeltd.com" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text="Po Box 255-406-56 ,Nairobi" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
-                                android:layout_marginTop="5dp"
-
-                                android:text=" 00100 Moi Avenue" />
-                        </LinearLayout>
-                    </LinearLayout>
 
                     <ProgressBar
+                        android:visibility="gone"
                         android:id="@+id/progressBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

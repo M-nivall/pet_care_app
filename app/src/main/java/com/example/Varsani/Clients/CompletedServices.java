@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.Varsani.Clients.Adapters.AdapterCompletedServices;
 import com.example.Varsani.Clients.Adapters.AdapterInvoices;
+import com.example.Varsani.Staff.Models.ServiceBookingModel;
 import com.example.Varsani.utils.SessionHandler;
 import com.example.Varsani.utils.Urls;
 import com.example.Varsani.Clients.Adapters.AdapterOrders;
@@ -36,7 +37,7 @@ import java.util.Map;
 
 public class CompletedServices extends AppCompatActivity {
 
-    private List<OrdersModal> list;
+    private List<ServiceBookingModel> list;
     private AdapterCompletedServices adapterCompletedServices;
 
     private SessionHandler session;
@@ -85,18 +86,45 @@ public class CompletedServices extends AppCompatActivity {
                             String msg=jsonObject.getString("message");
                             if(status.equals("1")){
                                 JSONArray jsonArray=jsonObject.getJSONArray("orders");
+
                                 for(int i=0; i <jsonArray.length();i++){
                                     JSONObject jsn=jsonArray.getJSONObject(i);
                                     String orderID=jsn.getString("orderID");
-                                    String orderCost=jsn.getString("orderCost");
-                                    String orderDate=jsn.getString("orderDate");
+                                    String clientName=jsn.getString("clientName");
                                     String mpesaCode=jsn.getString("mpesaCode");
+                                    String orderCost=jsn.getString("orderCost");
                                     String orderStatus=jsn.getString("orderStatus");
-                                    String itemCost=jsn.getString("itemCost");
+                                    String orderDate=jsn.getString("orderDate");
                                     String shippingCost=jsn.getString("shippingCost");
+                                    String itemCost=jsn.getString("itemCost");
+                                    String county=jsn.getString("county");
+                                    String town=jsn.getString("town");
+                                    String address=jsn.getString("address");
 
-                                    OrdersModal ordersModal=new OrdersModal(orderID,orderCost,mpesaCode,orderDate,orderStatus,shippingCost ,itemCost);
-                                    list.add(ordersModal);
+                                    String serviceName=jsn.getString("serviceName");
+                                    String serviceFee=jsn.getString("serviceFee");
+                                    String petName=jsn.getString("petName");
+                                    String serviceDate=jsn.getString("serviceDate");
+
+                                    ServiceBookingModel serviceBookingModel = new ServiceBookingModel(
+                                            orderID,
+                                            clientName,
+                                            mpesaCode,
+                                            orderCost,
+                                            orderStatus,
+                                            orderDate,
+                                            shippingCost,
+                                            itemCost,
+                                            county,
+                                            town,
+                                            address,
+                                            serviceName,
+                                            serviceFee,
+                                            petName,
+                                            serviceDate
+                                    );
+                                    list.add(serviceBookingModel);
+
                                 }
                                 adapterCompletedServices=new AdapterCompletedServices(getApplicationContext(),list);
                                 recyclerView.setAdapter(adapterCompletedServices);
