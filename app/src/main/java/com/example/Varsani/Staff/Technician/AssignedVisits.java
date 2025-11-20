@@ -25,6 +25,8 @@ import com.example.Varsani.Staff.Models.AssignedModel;
 import com.example.Varsani.Clients.Models.UserModel;
 import com.example.Varsani.R;
 import com.example.Varsani.Staff.Adapters.AdapterAsgnOrders;
+import com.example.Varsani.Staff.Models.ServiceBookingModel;
+import com.example.Varsani.Staff.Technician.Models.AssignedBookingModel;
 import com.example.Varsani.utils.SessionHandler;
 
 import org.json.JSONArray;
@@ -42,7 +44,7 @@ public class AssignedVisits extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    private List<AssignedModel>list;
+    private List<AssignedBookingModel>list;
     private AdapterAssignedVisits adapterAssignedVisits;
     private SessionHandler session;
     private UserModel user;
@@ -90,21 +92,50 @@ public class AssignedVisits extends AppCompatActivity {
                             if(status.equals("1")){
 
                                 JSONArray jsonArray=jsonObject.getJSONArray("details");
-                                for(int i=0;i <jsonArray.length();i++){
+                                for(int i=0; i <jsonArray.length();i++){
                                     JSONObject jsn=jsonArray.getJSONObject(i);
                                     String orderID=jsn.getString("orderID");
                                     String clientName=jsn.getString("clientName");
+                                    String mpesaCode=jsn.getString("mpesaCode");
+                                    String orderCost=jsn.getString("orderCost");
+                                    String orderStatus=jsn.getString("orderStatus");
+                                    String orderDate=jsn.getString("orderDate");
+                                    String shippingCost=jsn.getString("shippingCost");
+                                    String itemCost=jsn.getString("itemCost");
                                     String county=jsn.getString("county");
                                     String town=jsn.getString("town");
                                     String address=jsn.getString("address");
-                                    String orderStatus=jsn.getString("orderStatus");
-                                    AssignedModel assignedModel=new AssignedModel(orderID,orderStatus,clientName,address,county,town);
-                                    list.add(assignedModel);
+
+                                    String serviceName=jsn.getString("serviceName");
+                                    String serviceFee=jsn.getString("serviceFee");
+                                    String petName=jsn.getString("petName");
+                                    String serviceDate=jsn.getString("serviceDate");
+
+                                    AssignedBookingModel serviceBookingModel = new AssignedBookingModel(
+                                            orderID,
+                                            clientName,
+                                            mpesaCode,
+                                            orderCost,
+                                            orderStatus,
+                                            orderDate,
+                                            shippingCost,
+                                            itemCost,
+                                            county,
+                                            town,
+                                            address,
+                                            serviceName,
+                                            serviceFee,
+                                            petName,
+                                            serviceDate
+                                    );
+                                    list.add(serviceBookingModel);
+
                                 }
                                 progressBar.setVisibility(View.GONE);
                                 adapterAssignedVisits=new AdapterAssignedVisits(getApplicationContext(),list);
                                 recyclerView.setAdapter(adapterAssignedVisits);
-                            }else{
+                            }
+                            else{
                                 Toast toast=Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.TOP,0,250);
                                 toast.show();

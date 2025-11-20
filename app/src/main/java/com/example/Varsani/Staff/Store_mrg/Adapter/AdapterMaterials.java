@@ -84,9 +84,9 @@ public class AdapterMaterials extends RecyclerView.Adapter<RecyclerView.ViewHold
             final RequestModel o= items.get(position);
 
             view.txv_requestID.setText("#ID: "+o.getRequestID());
-            view.txv_name.setText("Technician: "+o.getName());
+            view.txv_name.setText("Staff: "+o.getName());
             view.txv_requestDate.setText("Date: "+o.getRequestDate());
-            //view.txv_requestStatus.setText("Status "+o.getRequestStatus());
+            view.txv_requestStatus.setText("Status "+o.getRequestStatus());
             view.txv_items.setText("Items: "+o.getItems());
             view.txv_phoneNo.setText("Tell: "+o.getPhoneNo());
 
@@ -104,6 +104,7 @@ public class AdapterMaterials extends RecyclerView.Adapter<RecyclerView.ViewHold
                         in.putExtra("amount",o.getAmount());
                         in.putExtra("requestStatus",o.getRequestStatus());
                         in.putExtra("requestDate",o.getRequestDate());
+                        in.putExtra("orderID",o.getAmount());
                         ctx.startActivity(in);
 
                     }

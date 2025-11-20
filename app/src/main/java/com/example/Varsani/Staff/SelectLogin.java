@@ -13,7 +13,7 @@ import com.example.Varsani.R;
 
 public class SelectLogin extends AppCompatActivity {
 
-    private CardView btn_finance,btn_shipping_mrg,btn_driver,btn_store_mrg, btn_service_mrg, btn_tech;
+    private CardView btn_finance,btn_shipping_mrg,btn_driver,btn_store_mrg, btn_service_mrg, btn_vet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,7 @@ public class SelectLogin extends AppCompatActivity {
         btn_shipping_mrg=findViewById(R.id.card_shipping);
         btn_store_mrg=findViewById(R.id.card_inventory);
         btn_service_mrg = findViewById(R.id.card_service);
-        btn_tech = findViewById(R.id.card_technician);
+        btn_vet = findViewById(R.id.card_vet);
 
 
         btn_driver.setOnClickListener(new View.OnClickListener() {
@@ -76,10 +76,10 @@ public class SelectLogin extends AppCompatActivity {
             }
         });
 
-        btn_tech.setOnClickListener(new View.OnClickListener() {
+        btn_vet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String staff="Technician";
+                String staff="Vet";
                 Intent tc = new Intent(getApplicationContext(),StaffLogin.class);
                 tc.putExtra("Staff",staff);
                 startActivity(tc);

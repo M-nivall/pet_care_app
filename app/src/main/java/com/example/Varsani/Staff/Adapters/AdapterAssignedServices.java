@@ -10,11 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.Varsani.Staff.Driver.AssignedItems;
-import com.example.Varsani.Staff.Models.AssignedModel;
-import com.example.Varsani.Staff.Technician.AssignedVisits;
-import com.example.Varsani.Staff.Technician.ServiceItems;
-import com.example.Varsani.Staff.Technician.VisitItems;
+import com.example.Varsani.Staff.Technician.CompleteService;
+import com.example.Varsani.Staff.Technician.Models.AssignedBookingModel;
 import com.example.Varsani.utils.SessionHandler;
 import com.example.Varsani.Clients.Models.UserModel;
 import com.example.Varsani.R;
@@ -23,102 +20,75 @@ import java.util.List;
 
 public class AdapterAssignedServices extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<AssignedModel> items;
-
+    private List<AssignedBookingModel> items;
     private Context ctx;
-    ProgressDialog progressDialog;
-//    private OnItemClickListener mOnItemClickListener;
-//    private OnMoreButtonClickListener onMoreButtonClickListener;
 
-    //
-
-    private SessionHandler session;
-    private UserModel user;
-    private String clientId = "";
-    private String orderID = "";
-
-    public static final String TAG = "Orders adapter";
-
-//    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
-//        this.mOnItemClickListener = mItemClickListener;
-//    }
-//
-//    public void setOnMoreButtonClickListener(final OnMoreButtonClickListener onMoreButtonClickListener) {
-//        this.onMoreButtonClickListener = onMoreButtonClickListener;
-//    }
-
-    public AdapterAssignedServices(Context context, List<AssignedModel> items) {
+    public AdapterAssignedServices(Context context, List<AssignedBookingModel> items) {
         this.items = items;
-        ctx = context;
+        this.ctx = context;
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView txv_orderID,txv_name, txv_orderStatus;
-
+        public TextView txv_orderID, txv_name, txv_orderStatus, txv_serviceName;
 
         public OriginalViewHolder(View v) {
             super(v);
-
-            txv_name =v.findViewById(R.id.txv_name);
+            txv_name = v.findViewById(R.id.txv_name);
+            txv_serviceName = v.findViewById(R.id.txv_serviceName);
             txv_orderStatus = v.findViewById(R.id.txv_orderStatus);
             txv_orderID = v.findViewById(R.id.txv_orderID);
-
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_driver_assigned, parent, false);
-        vh = new OriginalViewHolder(v);
-        return vh;
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.lv_assigned, parent, false);
+        return new OriginalViewHolder(v);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof OriginalViewHolder) {
+
             final OriginalViewHolder view = (OriginalViewHolder) holder;
+            final AssignedBookingModel o = items.get(position);
 
-            final AssignedModel o= items.get(position);
+            view.txv_orderID.setText("#Booking ID: " + o.getOrderID());
+            view.txv_orderStatus.setText("Status: " + o.getOrderStatus());
+            view.txv_serviceName.setText("Service: " + o.getServiceName());
+            view.txv_name.setText("Client: " + o.getClientName());
 
-            view.txv_orderID.setText("Serial No "+o.getOrderID());
-            view.txv_orderStatus.setText(o.getOrderStatus());
-            view.txv_name.setText(o.getClientName());
-            view.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent in=new Intent(ctx, ServiceItems.class);
-                    in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    in.putExtra("orderID", o.getOrderID());
-                    in.putExtra("clientName",o.getClientName());
-                    in.putExtra("orderStatus",o.getOrderStatus());
-                    in.putExtra("county",o.getCounty());
-                    in.putExtra("town",o.getTown());
-                    in.putExtra("address",o.getAddress());
-                    ctx.startActivity(in);
+            view.itemView.setOnClickListener(v -> {
 
+                Intent in = new Intent(ctx, CompleteService.class);
 
-                }
+                in.putExtra("orderID", o.getOrderID());
+                in.putExtra("orderCost", o.getOrderCost());
+                in.putExtra("clientName", o.getClientName());
+                in.putExtra("mpesaCode", o.getMpesaCode());
+                in.putExtra("orderDate", o.getOrderDate());
+                in.putExtra("orderStatus", o.getOrderStatus());
+                in.putExtra("itemCost", o.getOrderCost());
+                in.putExtra("shippingCost", o.getShippingCost());
+                in.putExtra("county", o.getCounty());
+                in.putExtra("town", o.getTown());
+                in.putExtra("address", o.getAddress());
+                in.putExtra("serviceName", o.getServiceName());
+                in.putExtra("serviceFee", o.getServiceFee());
+                in.putExtra("pet", o.getPetName());
+                in.putExtra("serviceDate", o.getServiceDate());
+
+                // FIX: Required when starting activity from adapter
+                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                ctx.startActivity(in);
             });
         }
     }
-
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-
-//    public interface OnItemClickListener {
-//        void onItemClick(View view, ProductModal obj, int pos);
-//    }
-//
-//    public interface OnMoreButtonClickListener {
-//        void onItemClick(View view, ProductModal obj, MenuItem item);
-//    }
-
-
-
 }

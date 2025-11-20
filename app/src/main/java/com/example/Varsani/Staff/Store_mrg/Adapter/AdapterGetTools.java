@@ -55,7 +55,7 @@ public class AdapterGetTools extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView txv_title,txv_stock, txv_price;
+        public TextView txv_title,txv_stock, txv_price, txv_category;
 
 
         public OriginalViewHolder(View v) {
@@ -64,6 +64,7 @@ public class AdapterGetTools extends RecyclerView.Adapter<RecyclerView.ViewHolde
             txv_title =v.findViewById(R.id.txv_title);
             txv_price = v.findViewById(R.id.txv_price);
             txv_stock = v.findViewById(R.id.txv_stock);
+            txv_category = v.findViewById(R.id.txv_category);
 
         }
     }
@@ -79,28 +80,42 @@ public class AdapterGetTools extends RecyclerView.Adapter<RecyclerView.ViewHolde
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if (holder instanceof com.example.Varsani.Staff.Store_mrg.Adapter.AdapterGetTools.OriginalViewHolder) {
-            final com.example.Varsani.Staff.Store_mrg.Adapter.AdapterGetTools.OriginalViewHolder view = (com.example.Varsani.Staff.Store_mrg.Adapter.AdapterGetTools.OriginalViewHolder) holder;
+        if (holder instanceof AdapterGetTools.OriginalViewHolder) {
 
-            final GetToolModel o= items.get(position);
+            final OriginalViewHolder view = (OriginalViewHolder) holder;
+            final GetToolModel o = items.get(position);
 
             view.txv_title.setText("Tool Name: " + o.getToolName());
-            view.txv_price.setText("Tool ID: "+o.getToolID());
-            view.txv_stock.setText("Quantity "+o.getQuantity());
-            view.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Intent in=new Intent(ctx, AddStock.class);
-                    //in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    //in.putExtra("toolID", o.getToolID());
-                    //in.putExtra("toolName", o.getToolName());
-                    //in.putExtra("quantity", o.getQuantity());
-                    //ctx.startActivity(in);
+            view.txv_price.setText("#ID: " + o.getToolID());
+            view.txv_stock.setText("Quantity: " + o.getQuantity());
+            view.txv_category.setText("Category: " + o.getCategory());
+            view.txv_price.setVisibility(View.GONE);
 
-                }
-            });
+            // -------------------------------
+            // CATEGORY COLOR DIFFERENTIATION
+            // -------------------------------
+            String cat = o.getCategory().trim().toLowerCase();
+
+            int color;
+
+            switch (cat) {
+                case "grooming":
+                    color = ctx.getResources().getColor(R.color.cat_grooming);
+                    break;
+                case "training":
+                    color = ctx.getResources().getColor(R.color.cat_training);
+                    break;
+                case "vaccination":
+                    color = ctx.getResources().getColor(R.color.cat_vaccine);
+                    break;
+                default:
+                    color = ctx.getResources().getColor(R.color.cat_default);
+            }
+
+            view.txv_category.setTextColor(color);
         }
     }
+
 
 
     @Override

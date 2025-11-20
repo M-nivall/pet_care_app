@@ -5,11 +5,13 @@ public class GetToolModel {
     String toolID;
     String toolName;
     String quantity;
+    String category;
 
-    public GetToolModel(String toolID, String toolName, String quantity){
+    public GetToolModel(String toolID, String toolName, String quantity, String category){
         this.toolName=toolName;
         this.quantity=quantity;
         this.toolID=toolID;
+        this.category=category;
     }
 
     public String getToolID() {
@@ -22,6 +24,10 @@ public class GetToolModel {
 
     public String getQuantity() {
         return quantity;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
 }

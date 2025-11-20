@@ -103,6 +103,7 @@ public class RequestedMaterials extends AppCompatActivity {
                                     String requestStatus=jsn.getString("requestStatus");
                                     String amount=jsn.getString("amount");
                                     String quantity=jsn.getString("amount");
+
                                     RequestModel rq=new RequestModel(requestID,  name,  phoneNo,
                                             items,  requestDate,  requestStatus, amount, quantity);
                                     list.add(rq);

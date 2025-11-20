@@ -45,7 +45,7 @@ public class ApproveMaterials extends AppCompatActivity {
 
     private Button btn_submit;
     private ProgressBar progressBar;
-    private String requestID, item, supplierID;
+    private String requestID, item,orderID;
 
     private SessionHandler session;
     private UserModel user;
@@ -74,6 +74,7 @@ public class ApproveMaterials extends AppCompatActivity {
 
         Intent in=getIntent();
         requestID=in.getStringExtra("requestID");
+        orderID=in.getStringExtra("orderID");
         item=in.getStringExtra("item");
 
 
@@ -142,6 +143,7 @@ public class ApproveMaterials extends AppCompatActivity {
 
                 params.put("requestID",requestID);
                 params.put("item",item);
+                params.put("orderID",orderID);
                 Log.e("PARAMS",""+params);
                 return params;
             }

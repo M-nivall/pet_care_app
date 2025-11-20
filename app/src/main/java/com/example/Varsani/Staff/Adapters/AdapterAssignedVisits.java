@@ -7,117 +7,104 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.Varsani.Staff.Driver.AssignedItems;
-import com.example.Varsani.Staff.Models.AssignedModel;
-import com.example.Varsani.Staff.Technician.AssignedVisits;
-import com.example.Varsani.Staff.Technician.VisitItems;
-import com.example.Varsani.utils.SessionHandler;
-import com.example.Varsani.Clients.Models.UserModel;
+import com.example.Varsani.Staff.Groomer.GroomingDetails;
+import com.example.Varsani.Staff.Technician.AssignedDetails;
+import com.example.Varsani.Staff.Technician.Models.AssignedBookingModel;
 import com.example.Varsani.R;
+import com.example.Varsani.Staff.Trainer.TrainingActivity;
 
 import java.util.List;
 
 public class AdapterAssignedVisits extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<AssignedModel> items;
-
+    private List<AssignedBookingModel> items;
     private Context ctx;
     ProgressDialog progressDialog;
-//    private OnItemClickListener mOnItemClickListener;
-//    private OnMoreButtonClickListener onMoreButtonClickListener;
 
-    //
-
-    private SessionHandler session;
-    private UserModel user;
-    private String clientId = "";
-    private String orderID = "";
-
-    public static final String TAG = "Orders adapter";
-
-//    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
-//        this.mOnItemClickListener = mItemClickListener;
-//    }
-//
-//    public void setOnMoreButtonClickListener(final OnMoreButtonClickListener onMoreButtonClickListener) {
-//        this.onMoreButtonClickListener = onMoreButtonClickListener;
-//    }
-
-    public AdapterAssignedVisits(Context context, List<AssignedModel> items) {
+    public AdapterAssignedVisits(Context context, List<AssignedBookingModel> items) {
         this.items = items;
-        ctx = context;
+        this.ctx = context;
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView txv_orderID,txv_name, txv_orderStatus;
-
+        public TextView txv_orderID, txv_name, txv_orderStatus, txv_serviceName;
 
         public OriginalViewHolder(View v) {
             super(v);
-
-            txv_name =v.findViewById(R.id.txv_name);
+            txv_name = v.findViewById(R.id.txv_name);
+            txv_serviceName = v.findViewById(R.id.txv_serviceName);
             txv_orderStatus = v.findViewById(R.id.txv_orderStatus);
             txv_orderID = v.findViewById(R.id.txv_orderID);
-
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_driver_assigned, parent, false);
-        vh = new OriginalViewHolder(v);
-        return vh;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lv_assigned, parent, false);
+        return new OriginalViewHolder(v);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof OriginalViewHolder) {
             final OriginalViewHolder view = (OriginalViewHolder) holder;
+            final AssignedBookingModel o = items.get(position);
 
-            final AssignedModel o= items.get(position);
+            view.txv_orderID.setText("#Booking ID: " + o.getOrderID());
+            view.txv_orderStatus.setText("Status: " + o.getOrderStatus());
+            view.txv_serviceName.setText("Service: " + o.getServiceName());
+            view.txv_name.setText("Client: " + o.getClientName());
 
-            view.txv_orderID.setText("Serial No "+o.getOrderID());
-            view.txv_orderStatus.setText(o.getOrderStatus());
-            view.txv_name.setText(o.getClientName());
             view.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent in=new Intent(ctx, VisitItems.class);
+                    Intent in;
+                    switch (o.getServiceName()) {
+                        case "Vaccination":
+                            in = new Intent(ctx, AssignedDetails.class);
+                            break;
+                        case "Grooming":
+                            in = new Intent(ctx, GroomingDetails.class);
+                            break;
+                        case "Training":
+                            in = new Intent(ctx, TrainingActivity.class);
+                            break;
+                        default:
+                            Toast.makeText(ctx, "Unknown service type", Toast.LENGTH_SHORT).show();
+                            return;
+                    }
+
                     in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    // Pass all extras
                     in.putExtra("orderID", o.getOrderID());
-                    in.putExtra("clientName",o.getClientName());
-                    in.putExtra("orderStatus",o.getOrderStatus());
-                    in.putExtra("county",o.getCounty());
-                    in.putExtra("town",o.getTown());
-                    in.putExtra("address",o.getAddress());
+                    in.putExtra("orderCost", o.getOrderCost());
+                    in.putExtra("clientName", o.getClientName());
+                    in.putExtra("mpesaCode", o.getMpesaCode());
+                    in.putExtra("orderDate", o.getOrderDate());
+                    in.putExtra("orderStatus", o.getOrderStatus());
+                    in.putExtra("itemCost", o.getOrderCost());
+                    in.putExtra("shippingCost", o.getShippingCost());
+                    in.putExtra("county", o.getCounty());
+                    in.putExtra("town", o.getTown());
+                    in.putExtra("address", o.getAddress());
+                    in.putExtra("serviceName", o.getServiceName());
+                    in.putExtra("serviceFee", o.getServiceFee());
+                    in.putExtra("pet", o.getPetName());
+                    in.putExtra("serviceDate", o.getServiceDate());
+
                     ctx.startActivity(in);
-
-
                 }
             });
         }
     }
 
-
     @Override
     public int getItemCount() {
         return items.size();
     }
-
-//    public interface OnItemClickListener {
-//        void onItemClick(View view, ProductModal obj, int pos);
-//    }
-//
-//    public interface OnMoreButtonClickListener {
-//        void onItemClick(View view, ProductModal obj, MenuItem item);
-//    }
-
-
-
 }

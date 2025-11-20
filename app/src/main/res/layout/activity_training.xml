@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".Staff.Trainer.TrainingActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="14dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="120dp">
+
+            <!-- Payment Details Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Payment Details"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#222"
+                        android:gravity="center"
+                        android:paddingBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/txv_orderID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order ID"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_mpesaCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mpesa Code"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_serviceFee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Amount"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_orderDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order Date"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_orderStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order Status"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Service Details Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Service Details"
+                        android:textColor="#222"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:paddingBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/txv_serviceName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Service Name"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_serviceDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Service Date"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_petName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pet Name"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Client Details Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Client Details"
+                        android:textColor="#222"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:paddingBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/txv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_county"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="County"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_town"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Town"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/txv_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:textColor="#444"
+                        android:textSize="15sp"
+                        android:paddingVertical="4dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Materials Card -->
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Request Materials"
+                        android:textColor="#222"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:paddingBottom="10dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Required materials for Service Delivery"
+                        android:paddingBottom="2dp"
+                        android:visibility="gone">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_materials"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:id="@+id/materialslayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@android:color/black" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingTop="5dp"
+                            android:text="Materials Needed for Service"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/checkBox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Leash" />
+
+                            <CheckBox
+                                android:id="@+id/checkBox2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Collar" />
+
+                            <CheckBox
+                                android:id="@+id/checkBox3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Target stick" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/checkBox4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Clicker" />
+
+                            <CheckBox
+                                android:id="@+id/checkBox5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Training Mat" />
+
+                            <CheckBox
+                                android:id="@+id/checkBox6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Whistle" />
+                        </LinearLayout>
+
+                    </LinearLayout> <!-- CLOSE materialslayout -->
+
+                </LinearLayout> <!-- CLOSE main LinearLayout -->
+
+            </androidx.cardview.widget.CardView> <!-- CLOSE CardView -->
+
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:indeterminate="true"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <!-- Bottom Approve Button -->
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:padding="14dp">
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Request Tools"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/colorPrimary"
+            android:textStyle="bold"
+            android:paddingVertical="14dp"
+            android:elevation="4dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

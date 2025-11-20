@@ -14,4 +14,10 @@
     <color name="red">#D81B1B</color>
     <color name="colorLightGray">#F5F5F5</color>  <!-- Soft Light Gray -->
     <color name="background_light">#F5F5F5</color>
+
+    <color name="cat_grooming">#FF9800</color>   <!-- Orange -->
+    <color name="cat_training">#3F51B5</color>  <!-- Indigo -->
+    <color name="cat_vaccine">#4CAF50</color>   <!-- Green -->
+    <color name="cat_default">#000000</color>   <!-- Black -->
+
 </resources>

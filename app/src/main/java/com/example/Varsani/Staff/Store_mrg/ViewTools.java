@@ -113,7 +113,9 @@ public class ViewTools extends AppCompatActivity {
                                     String toolID=jsn.getString("toolID");
                                     String toolName=jsn.getString("toolName");
                                     String quantity=jsn.getString("quantity");
-                                    GetToolModel getToolModel=new GetToolModel(toolID,toolName,quantity);
+                                    String category=jsn.getString("category");
+
+                                    GetToolModel getToolModel=new GetToolModel(toolID,toolName,quantity,category);
                                     list.add(getToolModel);
                                 }
                                 adapterGetTools=new AdapterGetTools(getApplicationContext(),list);
