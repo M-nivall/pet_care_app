@@ -244,10 +244,12 @@ public class CheckOut2 extends AppCompatActivity {
         String address = edt_address.getText().toString().trim();
         String town = edt_town.getText().toString().trim();
         String paymentRef = edtPaymentRef.getText().toString().trim();
+        String serviceDate = edt_date.getText().toString().trim();
         String petName = spinner_pet.getText().toString().trim();
 
         // ===== Validation =====
         if (TextUtils.isEmpty(county)) { showToastEnable("Please enter county"); return; }
+        if (TextUtils.isEmpty(serviceDate)) { showToastEnable("Please select service date"); return; }
         if (TextUtils.isEmpty(town)) { showToastEnable("Please enter town"); return; }
         if (TextUtils.isEmpty(address)) { showToastEnable("Please enter your Apartment/Plot"); return; }
         if (TextUtils.isEmpty(paymentRef)) { showToastEnable("Please enter Payment Reference Code"); return; }
@@ -304,6 +306,7 @@ public class CheckOut2 extends AppCompatActivity {
                 params.put("servicePrice", servicePrice);
                 params.put("serviceID", serviceID);
                 params.put("petName", petName);
+                params.put("serviceDate", serviceDate);
                 return params;
             }
         };

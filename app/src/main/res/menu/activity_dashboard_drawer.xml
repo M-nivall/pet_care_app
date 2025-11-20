@@ -10,13 +10,13 @@
             android:id="@+id/nav_home"/>
         <item
             android:id="@+id/nav_new_orders"
-            android:title="New Payments" />
+            android:title="New Poroducts Payments" />
          <item
             android:id="@+id/nav_approvedOrders"
             android:title="Approved Payments" />
         <item
             android:id="@+id/nav_new_booking_payments"
-            android:title="New Booking Fee Payments" />
+            android:title="New Service Payments" />
         <item
             android:id="@+id/nav_new_serv_payments"
             android:title="New Service Payments" />

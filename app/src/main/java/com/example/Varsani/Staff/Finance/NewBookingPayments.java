@@ -30,6 +30,7 @@ import com.example.Varsani.R;
 import com.example.Varsani.Staff.Adapters.AdapterNewServPayments;
 import com.example.Varsani.Staff.Finance.Adapters.AdapterNewBooking;
 import com.example.Varsani.Staff.Models.ClientOrderModel;
+import com.example.Varsani.Staff.Models.ServiceBookingModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ import java.util.List;
 
 public class NewBookingPayments extends AppCompatActivity {
 
-    private List<ClientOrderModel> list;
+    private List<ServiceBookingModel> list;
     private AdapterNewBooking adapterNewBooking;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
@@ -95,9 +96,31 @@ public class NewBookingPayments extends AppCompatActivity {
                                     String county=jsn.getString("county");
                                     String town=jsn.getString("town");
                                     String address=jsn.getString("address");
-                                    ClientOrderModel clientOrderModel=new ClientOrderModel(orderID,clientName,mpesaCode,
-                                            orderCost,orderStatus,orderDate,shippingCost,itemCost,county,town,address);
-                                    list.add(clientOrderModel);
+
+                                    String serviceName=jsn.getString("serviceName");
+                                    String serviceFee=jsn.getString("serviceFee");
+                                    String petName=jsn.getString("petName");
+                                    String serviceDate=jsn.getString("serviceDate");
+
+                                    ServiceBookingModel serviceBookingModel = new ServiceBookingModel(
+                                            orderID,
+                                            clientName,
+                                            mpesaCode,
+                                            orderCost,
+                                            orderStatus,
+                                            orderDate,
+                                            shippingCost,
+                                            itemCost,
+                                            county,
+                                            town,
+                                            address,
+                                            serviceName,
+                                            serviceFee,
+                                            petName,
+                                            serviceDate
+                                    );
+                                    list.add(serviceBookingModel);
+
                                 }
                                 adapterNewBooking=new AdapterNewBooking(getApplicationContext(),list);
                                 recyclerView.setAdapter(adapterNewBooking);

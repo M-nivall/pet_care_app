@@ -52,8 +52,9 @@ public class BookingFeeDetails extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private TextView txv_name,txv_orderID,txv_orderStatus,txv_orderDate,
-            txv_orderCost,txv_itemCost,txv_shippingCost,txv_address,txv_town,
+            txv_serviceFee,txv_address,txv_town,
             txv_county,txv_mpesaCode;
+    private TextView txv_serviceName, txv_serviceDate, txv_petName;
     private List<ClientItemsModal> list;
     private AdapterBookItems adapterBookItems;
     private RelativeLayout layout_bottom;
@@ -72,16 +73,16 @@ public class BookingFeeDetails extends AppCompatActivity {
 
         layout_bottom=findViewById(R.id.layout_bottom);
         progressBar=findViewById(R.id.progressBar);
-        recyclerView=findViewById(R.id.recyclerView);
         txv_address=findViewById(R.id.txv_address);
         txv_town=findViewById(R.id.txv_town);
         txv_county=findViewById(R.id.txv_county);
         txv_name=findViewById(R.id.txv_name);
         txv_mpesaCode=findViewById(R.id.txv_mpesaCode);
-        txv_orderCost=findViewById(R.id.txv_orderCost);
         txv_orderStatus=findViewById(R.id.txv_orderStatus);
-        txv_shippingCost=findViewById(R.id.txv_shippingCost);
-        txv_itemCost=findViewById(R.id.txv_itemCost);
+        txv_serviceFee=findViewById(R.id.txv_serviceFee);
+        txv_serviceName=findViewById(R.id.txv_serviceName);
+        txv_petName=findViewById(R.id.txv_petName);
+        txv_serviceDate=findViewById(R.id.txv_serviceDate);
         txv_orderID=findViewById(R.id.txv_orderID);
         txv_orderDate=findViewById(R.id.txv_orderDate);
         layout_bottom.setVisibility(View.GONE);
@@ -101,23 +102,25 @@ public class BookingFeeDetails extends AppCompatActivity {
         String town=intent.getStringExtra("town");
         String county=intent.getStringExtra("county");
 
+        String serviceName=intent.getStringExtra("serviceName");
+        String serviceFee=intent.getStringExtra("serviceFee");
+        String pet=intent.getStringExtra("pet");
+        String serviceDate=intent.getStringExtra("serviceDate");
+
         txv_orderDate.setText("Date :" + orderDate);
-        txv_orderCost.setText("Booking Fee ksh: " + orderCost);
-        txv_orderStatus.setText(orderStatus );
-        txv_mpesaCode.setText("RefID :" + mpesaCode);
-        txv_shippingCost.setText("Shipping cost " + shippingCost);
-        txv_itemCost.setText("Item cost " + itemCost);
-        txv_name.setText(clientName );
+        txv_orderStatus.setText("Status: " + orderStatus );
+        txv_mpesaCode.setText("Payment Code :" + mpesaCode);
+        txv_serviceFee.setText("Service Fee " + serviceFee);
+        txv_name.setText("Client: " + clientName );
         txv_town.setText("Town " +town );
         txv_county.setText(county +"-"+town);
         txv_address.setText("Address " +address );
-        txv_orderID.setText("Serial No: " +orderID );
+        txv_orderID.setText("#Booking ID: " +orderID );
 
-        txv_itemCost.setVisibility(View.GONE);
-        txv_shippingCost.setVisibility(View.GONE);
-        txv_town.setVisibility(View.GONE);
+        txv_serviceName.setText("Service: " + serviceName );
+        txv_serviceDate.setText("Serial No: " + serviceDate );
+        txv_petName.setText("Serial No: " + pet );
 
-        list=new ArrayList<>();
 
         recyclerView.setLayoutManager( new LinearLayoutManager(getApplicationContext()));
         RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getApplicationContext(),1);
@@ -129,14 +132,7 @@ public class BookingFeeDetails extends AppCompatActivity {
                 alertApprove();
             }
         });
-//         btn_reject.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
-        getClientItem();
     }
 
     @Override
@@ -145,72 +141,6 @@ public class BookingFeeDetails extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void getClientItem(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_QUOTATION_ITEMS,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-                            Log.e("RESPONSE", response);
-                            JSONObject jsonObject=new JSONObject(response);
-                            String status=jsonObject.getString("status");
-                            String msg=jsonObject.getString("message");
-
-                            if(status.equals("1")){
-                                JSONArray jsonArray=jsonObject.getJSONArray("details");
-                                for(int i=0; i <jsonArray.length();i++){
-                                    JSONObject jsn=jsonArray.getJSONObject(i);
-                                    String itemName=jsn.getString("itemName");
-                                    String quantity=jsn.getString("quantity");
-                                    String itemPrice=jsn.getString("itemPrice");
-                                    String subTotal=jsn.getString("subTotal");
-                                    ClientItemsModal clientItemsModal=new ClientItemsModal(itemName,itemPrice,quantity,subTotal);
-                                    list.add(clientItemsModal);
-                                }
-                                adapterBookItems=new AdapterBookItems(getApplicationContext(),list);
-                                recyclerView.setAdapter(adapterBookItems);
-                                progressBar.setVisibility(View.GONE);
-                                if(orderStatus.equals("Pending approval")){
-                                    layout_bottom.setVisibility(View.VISIBLE);
-                                }
-
-                            }else{
-                                progressBar.setVisibility(View.GONE);
-                                Toast toast=Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.TOP,0,250);
-                                toast.show();
-                            }
-
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Toast toast=Toast.makeText(getApplicationContext(), e.toString(),Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP,0,250);
-                            toast.show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast toast=Toast.makeText(getApplicationContext(), error.toString(),Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP,0,250);
-                toast.show();
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError {
-                Map<String,String> params =new HashMap<>();
-                params.put("orderID",orderID);
-                Log.e("Params",""+ params);
-                return  params;
-            }
-        };
-        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
     }
 
 

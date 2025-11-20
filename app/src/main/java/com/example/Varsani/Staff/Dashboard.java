@@ -206,8 +206,8 @@ public class Dashboard extends AppCompatActivity {
             if (userType.equals("Finance")) {
                 navigationView.getMenu().findItem(R.id.nav_new_orders).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_approvedOrders).setVisible(true);
-                navigationView.getMenu().findItem(R.id.nav_new_serv_payments).setVisible(true);
-                navigationView.getMenu().findItem(R.id.nav_approved_serv_payments).setVisible(true);
+                navigationView.getMenu().findItem(R.id.nav_new_serv_payments).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_approved_serv_payments).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_supplier_payments).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_new_booking_payments).setVisible(true);
 

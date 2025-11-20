@@ -16,12 +16,13 @@ import com.example.Varsani.Staff.Adapters.AdapterNewServPayments;
 import com.example.Varsani.Staff.Finance.BookingFeeDetails;
 import com.example.Varsani.Staff.Finance.PaymentDetails;
 import com.example.Varsani.Staff.Models.ClientOrderModel;
+import com.example.Varsani.Staff.Models.ServiceBookingModel;
 import com.example.Varsani.utils.SessionHandler;
 
 import java.util.List;
 
 public class AdapterNewBooking extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private List<ClientOrderModel> items;
+    private List<ServiceBookingModel> items;
 
     private Context ctx;
     ProgressDialog progressDialog;
@@ -45,7 +46,7 @@ public class AdapterNewBooking extends RecyclerView.Adapter<RecyclerView.ViewHol
 //        this.onMoreButtonClickListener = onMoreButtonClickListener;
 //    }
 
-    public AdapterNewBooking(Context context, List<ClientOrderModel> items) {
+    public AdapterNewBooking(Context context, List<ServiceBookingModel> items) {
         this.items = items;
         ctx = context;
     }
@@ -84,13 +85,13 @@ public class AdapterNewBooking extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (holder instanceof AdapterNewBooking.OriginalViewHolder) {
             final AdapterNewBooking.OriginalViewHolder view = (AdapterNewBooking.OriginalViewHolder) holder;
 
-            final ClientOrderModel o= items.get(position);
+            final ServiceBookingModel o= items.get(position);
 
             view.txv_orderID.setText("#ID: "+o.getOrderID());
             view.txv_name.setText("Client: " + o.getClientName());
             view.txv_orderStatus.setText("Status: " + o.getOrderStatus());
-            view.txv_orderCost.setText("Amount: Ksh "+o.getOrderCost());
-            view.txv_mpesaCode.setText("Payment Code: "+o.getMpesaCode());
+            view.txv_orderCost.setText("Amount: Ksh "+o.getServiceFee());
+            view.txv_mpesaCode.setText("Service: "+o.getServiceName());
             view.txv_orderDate.setText("Date: "+o.getOrderDate());
 
 
@@ -111,6 +112,11 @@ public class AdapterNewBooking extends RecyclerView.Adapter<RecyclerView.ViewHol
                     in.putExtra("county",o.getCounty());
                     in.putExtra("town",o.getTown());
                     in.putExtra("address",o.getAddress());
+
+                    in.putExtra("serviceName",o.getServiceName());
+                    in.putExtra("serviceFee",o.getServiceFee());
+                    in.putExtra("pet",o.getPetName());
+                    in.putExtra("serviceDate",o.getServiceDate());
                     ctx.startActivity(in);
 
 
