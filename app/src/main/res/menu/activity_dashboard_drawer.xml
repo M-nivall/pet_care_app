@@ -10,7 +10,7 @@
             android:id="@+id/nav_home"/>
         <item
             android:id="@+id/nav_new_orders"
-            android:title="New Poroducts Payments" />
+            android:title="New Products Payments" />
          <item
             android:id="@+id/nav_approvedOrders"
             android:title="Approved Payments" />
