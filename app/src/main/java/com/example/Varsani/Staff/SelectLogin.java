@@ -13,7 +13,7 @@ import com.example.Varsani.R;
 
 public class SelectLogin extends AppCompatActivity {
 
-    private CardView btn_finance,btn_shipping_mrg,btn_driver,btn_store_mrg, btn_service_mrg, btn_vet;
+    private CardView btn_finance,btn_shipping_mrg,btn_driver,btn_store_mrg, btn_service_mrg, btn_vet, btn_trainer, btn_groomer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,8 @@ public class SelectLogin extends AppCompatActivity {
         btn_store_mrg=findViewById(R.id.card_inventory);
         btn_service_mrg = findViewById(R.id.card_service);
         btn_vet = findViewById(R.id.card_vet);
+        btn_trainer = findViewById(R.id.card_trainer);
+        btn_groomer = findViewById(R.id.card_groomer);
 
 
         btn_driver.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +82,24 @@ public class SelectLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String staff="Vet";
+                Intent tc = new Intent(getApplicationContext(),StaffLogin.class);
+                tc.putExtra("Staff",staff);
+                startActivity(tc);
+            }
+        });
+        btn_trainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String staff="Trainer";
+                Intent tc = new Intent(getApplicationContext(),StaffLogin.class);
+                tc.putExtra("Staff",staff);
+                startActivity(tc);
+            }
+        });
+        btn_groomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String staff="Groomer";
                 Intent tc = new Intent(getApplicationContext(),StaffLogin.class);
                 tc.putExtra("Staff",staff);
                 startActivity(tc);

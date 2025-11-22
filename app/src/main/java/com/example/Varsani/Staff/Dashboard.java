@@ -234,6 +234,14 @@ public class Dashboard extends AppCompatActivity {
                 navigationView.getMenu().findItem(R.id.nav_quot_visit).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_assigned_services).setVisible(true);
             }
+            else if (userType.equals("Trainer")) {
+                navigationView.getMenu().findItem(R.id.nav_quot_visit).setVisible(true);
+                navigationView.getMenu().findItem(R.id.nav_assigned_services).setVisible(true);
+            }
+            else if (userType.equals("Groomer")) {
+                navigationView.getMenu().findItem(R.id.nav_quot_visit).setVisible(true);
+                navigationView.getMenu().findItem(R.id.nav_assigned_services).setVisible(true);
+            }
         }
     }
 }
