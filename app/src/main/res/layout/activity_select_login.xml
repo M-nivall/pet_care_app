@@ -43,7 +43,7 @@
                 <ImageView
                     android:layout_width="12mm"
                     android:layout_height="12mm"
-                    android:src="@drawable/finance" />
+                    android:src="@drawable/finance_person" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
                 <ImageView
                     android:layout_width="12mm"
                     android:layout_height="12mm"
-                    android:src="@drawable/trucks" />
+                    android:src="@drawable/shipping_person" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
                 <ImageView
                     android:layout_width="12mm"
                     android:layout_height="12mm"
-                    android:src="@drawable/inventory" />
+                    android:src="@drawable/manger_person" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,7 +184,7 @@
                 <ImageView
                     android:layout_width="12mm"
                     android:layout_height="12mm"
-                    android:src="@drawable/inventory" />
+                    android:src="@drawable/vet_icon" />
 
                 <TextView
                     style="bold"
@@ -219,7 +219,7 @@
                 <ImageView
                     android:layout_width="12mm"
                     android:layout_height="12mm"
-                    android:src="@drawable/inventory" />
+                    android:src="@drawable/inventory_icon" />
 
                 <TextView
                     style="bold"
@@ -254,7 +254,7 @@
                 <ImageView
                     android:layout_width="12mm"
                     android:layout_height="12mm"
-                    android:src="@drawable/inventory" />
+                    android:src="@drawable/trainer_icon" />
 
                 <TextView
                     style="bold"
@@ -289,7 +289,7 @@
                 <ImageView
                     android:layout_width="12mm"
                     android:layout_height="12mm"
-                    android:src="@drawable/inventory" />
+                    android:src="@drawable/groomer_person" />
 
                 <TextView
                     style="bold"
