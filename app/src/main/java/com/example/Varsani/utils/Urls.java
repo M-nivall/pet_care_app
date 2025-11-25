@@ -116,6 +116,7 @@ public class Urls {
     public static final String URL_SEND_REQUEST = ROOT_URL + "stock_mrg/send_requests.php";
     public static final String URL_NEW_ORDERS=ROOT_URL + "finance/new_orders.php";
     public static final String URL_REQUESTMATERIALS=ROOT_URL + "stock_mrg/material_request.php";
+    public static final String URL_RETURN_TOOLS=ROOT_URL + "technician/requested_tools.php";
     public static final String URL_REQUESTS=ROOT_URL + "stock_mrg/request.php";
     public static final String URL_SERVICE_COMPLETED= ROOT_URL+"serv_mrg/service_history.php";
     public static final String URL_GET_TOOLS=ROOT_URL + "stock_mrg/tools.php";

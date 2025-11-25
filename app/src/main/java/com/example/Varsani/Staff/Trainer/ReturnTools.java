@@ -1,6 +1,7 @@
 package com.example.Varsani.Staff.Trainer;
 
 import static com.example.Varsani.utils.Urls.URL_REQUESTMATERIALS;
+import static com.example.Varsani.utils.Urls.URL_RETURN_TOOLS;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,28 +22,36 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.Varsani.Clients.Models.UserModel;
 import com.example.Varsani.R;
 import com.example.Varsani.Staff.Store_mrg.Adapter.AdapterMaterials;
 import com.example.Varsani.Staff.Store_mrg.Model.RequestModel;
 import com.example.Varsani.Staff.Store_mrg.RequestSupplier;
+import com.example.Varsani.Staff.Trainer.Adapters.AdapterRequestedTools;
+import com.example.Varsani.utils.SessionHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ReturnTools extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private List<RequestModel> list;
-    private AdapterMaterials adapter;
+    private SessionHandler session;
+    private UserModel user;
+    private AdapterRequestedTools adapter;
     private Button btn_next;
 
     @Override
@@ -61,6 +70,9 @@ public class ReturnTools extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 1);
         recyclerView.setLayoutManager(layoutManager);
+
+        session=new SessionHandler(getApplicationContext());
+        user=session.getUserDetails();
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +93,7 @@ public class ReturnTools extends AppCompatActivity {
     }
 
     public void requests(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_REQUESTMATERIALS,
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_RETURN_TOOLS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -137,7 +149,15 @@ public class ReturnTools extends AppCompatActivity {
                 toast.show();
                 Log.e("ERROR E ", error.toString());
             }
-        });
+        }){
+            @Override
+            protected Map<String,String> getParams()throws AuthFailureError {
+                Map<String,String>params=new HashMap<>();
+                params.put("staffID",user.getClientID());
+                Log.e("PARAMS","" +params);
+                return params;
+            }
+        };
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
