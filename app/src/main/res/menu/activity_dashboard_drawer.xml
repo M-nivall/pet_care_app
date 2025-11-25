@@ -69,6 +69,10 @@
             android:title="Proceed Services"/>
 
         <item
+            android:id="@+id/nav_return_tools"
+            android:title="Return Tools"/>
+
+        <item
             android:id="@+id/nav_staff_feedback"
             android:title="My Feedback" />
         <item

@@ -26,6 +26,7 @@ import com.example.Varsani.Staff.ServMrg.*;
 import com.example.Varsani.Staff.ShippingMrg.*;
 import com.example.Varsani.Staff.Store_mrg.*;
 import com.example.Varsani.Staff.Technician.*;
+import com.example.Varsani.Staff.Trainer.ReturnTools;
 import com.example.Varsani.utils.SessionHandler;
 import com.google.android.material.navigation.NavigationView;
 
@@ -112,6 +113,8 @@ public class Dashboard extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), AssignedServices.class));
         } else if (id == R.id.nav_materials) {
             startActivity(new Intent(getApplicationContext(), RequestedMaterials.class));
+        }else if (id == R.id.nav_return_tools) {
+            startActivity(new Intent(getApplicationContext(), ReturnTools.class));
         } else if (id == R.id.nav_staff_feedback) {
             startActivity(new Intent(getApplicationContext(), Stafffeedback.class));
         } else if (id == R.id.nav_supplies) {
@@ -197,6 +200,7 @@ public class Dashboard extends AppCompatActivity {
         navigationView.getMenu().findItem(R.id.nav_supplier_payments).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_materials).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_tools).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_return_tools).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_service_completed).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_new_booking_payments).setVisible(false);
 
@@ -233,14 +237,17 @@ public class Dashboard extends AppCompatActivity {
             } else if (userType.equals("Vet")) {
                 navigationView.getMenu().findItem(R.id.nav_quot_visit).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_assigned_services).setVisible(true);
+                navigationView.getMenu().findItem(R.id.nav_return_tools).setVisible(true);
             }
             else if (userType.equals("Trainer")) {
                 navigationView.getMenu().findItem(R.id.nav_quot_visit).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_assigned_services).setVisible(true);
+                navigationView.getMenu().findItem(R.id.nav_return_tools).setVisible(true);
             }
             else if (userType.equals("Groomer")) {
                 navigationView.getMenu().findItem(R.id.nav_quot_visit).setVisible(true);
                 navigationView.getMenu().findItem(R.id.nav_assigned_services).setVisible(true);
+                navigationView.getMenu().findItem(R.id.nav_return_tools).setVisible(true);
             }
         }
     }
