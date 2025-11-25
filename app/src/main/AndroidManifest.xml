@@ -13,6 +13,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Staff.Trainer.ReturnRequestedTools"
+            android:exported="false" />
+        <activity
             android:name=".Staff.Trainer.ReturnTools"
             android:exported="false" />
         <activity

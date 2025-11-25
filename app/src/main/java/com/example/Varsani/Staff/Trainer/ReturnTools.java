@@ -60,7 +60,7 @@ public class ReturnTools extends AppCompatActivity {
         setContentView(R.layout.activity_return_tools);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Requested Materials");
+        getSupportActionBar().setTitle("Return Tools");
         progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
         btn_next = findViewById(R.id.btn_next);
@@ -120,7 +120,7 @@ public class ReturnTools extends AppCompatActivity {
                                             items,  requestDate,  requestStatus, amount, quantity);
                                     list.add(rq);
                                 }
-                                adapter=new AdapterMaterials(getApplicationContext(),list);
+                                adapter=new AdapterRequestedTools(getApplicationContext(),list);
                                 recyclerView.setAdapter(adapter);
                                 progressBar.setVisibility(View.GONE);
 
